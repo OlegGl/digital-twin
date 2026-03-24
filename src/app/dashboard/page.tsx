@@ -1,12 +1,89 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { defaultBuilding } from '@/data/building';
 import { SensorType, SENSOR_COLORS, SENSOR_LABELS, TelemetryPoint } from '@/types';
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
+
+function useContainerWidth(ref: React.RefObject<HTMLDivElement | null>) {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    if (!ref.current) return;
+    const measure = () => {
+      if (ref.current) setWidth(ref.current.clientWidth);
+    };
+    measure();
+    const obs = new ResizeObserver(measure);
+    obs.observe(ref.current);
+    return () => obs.disconnect();
+  }, [ref]);
+  return width;
+}
+
+function ChartGrid({ hvacData, elecData, waterData, secData }: {
+  hvacData: TelemetryPoint[];
+  elecData: TelemetryPoint[];
+  waterData: TelemetryPoint[];
+  secData: TelemetryPoint[];
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const fullWidth = useContainerWidth(containerRef);
+  // In 2-col grid, each card is ~half minus gap minus padding
+  const chartW = fullWidth > 700 ? Math.floor((fullWidth - 16) / 2) - 32 : fullWidth - 32;
+  const chartH = 192;
+
+  if (chartW <= 0) {
+    return <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 gap-4" />;
+  }
+
+  return (
+    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
+        <h3 className="text-sm font-medium text-gray-300 mb-3">Temperature (HVAC)</h3>
+        <LineChart width={chartW} height={chartH} data={hvacData}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
+          <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
+          <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} domain={['auto', 'auto']} />
+          <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
+          <Line type="monotone" dataKey="value" stroke={SENSOR_COLORS[SensorType.HVAC]} strokeWidth={2} dot={false} name="Temp °F" />
+        </LineChart>
+      </div>
+      <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
+        <h3 className="text-sm font-medium text-gray-300 mb-3">Energy Consumption</h3>
+        <AreaChart width={chartW} height={chartH} data={elecData}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
+          <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
+          <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} />
+          <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
+          <Area type="monotone" dataKey="value" stroke={SENSOR_COLORS[SensorType.ELECTRICAL]} fill={SENSOR_COLORS[SensorType.ELECTRICAL]} fillOpacity={0.15} strokeWidth={2} name="kW" />
+        </AreaChart>
+      </div>
+      <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
+        <h3 className="text-sm font-medium text-gray-300 mb-3">Water Usage</h3>
+        <BarChart width={chartW} height={chartH} data={waterData}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
+          <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
+          <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} />
+          <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
+          <Bar dataKey="value" fill={SENSOR_COLORS[SensorType.WATER]} fillOpacity={0.7} name="GPM" />
+        </BarChart>
+      </div>
+      <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
+        <h3 className="text-sm font-medium text-gray-300 mb-3">Access Events (Security)</h3>
+        <LineChart width={chartW} height={chartH} data={secData}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
+          <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
+          <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} />
+          <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
+          <Line type="monotone" dataKey="value" stroke={SENSOR_COLORS[SensorType.SECURITY]} strokeWidth={2} dot={false} name="Events" />
+        </LineChart>
+      </div>
+    </div>
+  );
+}
 
 const RANGES = [
   { label: '1h', ms: 3600000 },
@@ -145,71 +222,12 @@ export default function Dashboard() {
       </div>
 
       {/* Charts grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Temperature */}
-        <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-3">Temperature (HVAC)</h3>
-          <div style={{ width: "100%", height: 192 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={hvacData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
-                <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
-                <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} domain={['auto', 'auto']} />
-                <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
-                <Line type="monotone" dataKey="value" stroke={SENSOR_COLORS[SensorType.HVAC]} strokeWidth={2} dot={false} name="Temp °F" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* Energy */}
-        <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-3">Energy Consumption</h3>
-          <div style={{ width: "100%", height: 192 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={elecData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
-                <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
-                <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} />
-                <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
-                <Area type="monotone" dataKey="value" stroke={SENSOR_COLORS[SensorType.ELECTRICAL]} fill={SENSOR_COLORS[SensorType.ELECTRICAL]} fillOpacity={0.15} strokeWidth={2} name="kW" />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* Water */}
-        <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-3">Water Usage</h3>
-          <div style={{ width: "100%", height: 192 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={waterData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
-                <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
-                <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} />
-                <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
-                <Bar dataKey="value" fill={SENSOR_COLORS[SensorType.WATER]} fillOpacity={0.7} name="GPM" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-
-        {/* Occupancy (from security) */}
-        <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
-          <h3 className="text-sm font-medium text-gray-300 mb-3">Access Events (Security)</h3>
-          <div style={{ width: "100%", height: 192 }}>
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={secData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
-                <XAxis dataKey="timestamp" tickFormatter={formatTime} stroke="#333" tick={{ fontSize: 10, fill: '#555' }} interval="preserveStartEnd" />
-                <YAxis stroke="#333" tick={{ fontSize: 10, fill: '#555' }} />
-                <Tooltip contentStyle={chartStyle} labelFormatter={(v) => new Date(v as string).toLocaleString()} />
-                <Line type="monotone" dataKey="value" stroke={SENSOR_COLORS[SensorType.SECURITY]} strokeWidth={2} dot={false} name="Events" />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
+      <ChartGrid
+        hvacData={hvacData}
+        elecData={elecData}
+        waterData={waterData}
+        secData={secData}
+      />
     </div>
   );
 }
