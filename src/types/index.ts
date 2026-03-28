@@ -82,3 +82,41 @@ export interface TelemetryPoint {
   value: number;
   unit: string;
 }
+
+export type MEPNodeType =
+  | 'source'
+  | 'junction'
+  | 'panel'
+  | 'valve'
+  | 'meter'
+  | 'equipment'
+  | 'terminal'
+  | 'riser';
+
+export interface SystemNode {
+  id: string;
+  name: string;
+  systemType: SensorType;
+  nodeType: MEPNodeType;
+  position: Position;
+  floor: number;
+  description: string;
+  specs: Record<string, string | number>;
+  status: 'normal' | 'warning' | 'alert';
+}
+
+export interface SystemPipe {
+  id: string;
+  systemType: SensorType;
+  fromNode: string;
+  toNode: string;
+  waypoints: [number, number, number][];
+  diameter: number;
+  label?: string;
+}
+
+export interface MEPSystem {
+  type: SensorType;
+  nodes: SystemNode[];
+  pipes: SystemPipe[];
+}
