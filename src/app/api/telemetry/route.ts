@@ -1,7 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { readFileSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
 import { generateTelemetry } from '@/data/telemetry';
 import { SensorType } from '@/types';
 import { defaultBuilding } from '@/data/building';
+
+function findSensorType(sensorId: string): SensorType | null {
+  // First try default building (fast path)
+  for (const floor of defaultBuilding.floors) {
+    const sensor = floor.sensors.find((s) => s.id === sensorId);
+    if (sensor) return sensor.type;
+  }
+
+  // Search all building JSON files
+  const dir = join(process.cwd(), 'public', 'buildings');
+  try {
+    const files = readdirSync(dir).filter((f) => f.endsWith('.json') && f !== 'index.json');
+    for (const file of files) {
+      try {
+        const data = JSON.parse(readFileSync(join(dir, file), 'utf-8'));
+        if (data.floors) {
+          for (const floor of data.floors) {
+            const sensor = floor.sensors?.find((s: { id: string; type: string }) => s.id === sensorId);
+            if (sensor) return sensor.type as SensorType;
+          }
+        }
+      } catch { /* skip malformed files */ }
+    }
+  } catch { /* dir doesn't exist yet */ }
+
+  return null;
+}
 
 export async function GET(request: NextRequest) {
   const params = request.nextUrl.searchParams;
@@ -17,16 +46,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  // Find sensor type from building data
-  let sensorType: SensorType | null = null;
-  for (const floor of defaultBuilding.floors) {
-    const sensor = floor.sensors.find((s) => s.id === sensorId);
-    if (sensor) {
-      sensorType = sensor.type;
-      break;
-    }
-  }
-
+  const sensorType = findSensorType(sensorId);
   if (!sensorType) {
     return NextResponse.json({ error: 'Sensor not found' }, { status: 404 });
   }
