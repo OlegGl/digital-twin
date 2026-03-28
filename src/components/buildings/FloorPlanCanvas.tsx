@@ -20,6 +20,8 @@ interface Props {
 }
 
 const GRID_SIZE = 10;
+const NODE_RADIUS = 8;
+const NODE_HIT_RADIUS = 22; // larger hit area for touch
 
 export default function FloorPlanCanvas({
   floor,
@@ -45,6 +47,8 @@ export default function FloorPlanCanvas({
   const longPressTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isPanning = useRef(false);
   const panStart = useRef({ mx: 0, my: 0, px: 0, py: 0 });
+  const pinchStart = useRef<{ dist: number; scale: number; cx: number; cy: number } | null>(null);
+  const longPressPos = useRef<{ x: number; y: number } | null>(null);
 
   // Resize observer
   useEffect(() => {
@@ -125,7 +129,7 @@ export default function FloorPlanCanvas({
       ctx.stroke();
     }
 
-    // Pipes (axis-aligned routing)
+    // Pipes
     pipes.forEach((pipe) => {
       const fromNode = allNodes.find((n) => n.id === pipe.fromNode);
       const toNode = allNodes.find((n) => n.id === pipe.toNode);
@@ -136,7 +140,6 @@ export default function FloorPlanCanvas({
       ctx.lineWidth = Math.max(1, pipe.diameter * scale * 0.5);
       ctx.globalAlpha = 0.7;
 
-      // Route at right angles: vertical first (in 2D that's Z), then X
       const from = toCanvas(fromNode.position.x, fromNode.position.z);
       const to = toCanvas(toNode.position.x, toNode.position.z);
       const mid = { x: from.x, y: to.y };
@@ -171,51 +174,60 @@ export default function FloorPlanCanvas({
     nodes.forEach((node) => {
       const p = toCanvas(node.position.x, node.position.z);
       const color = SENSOR_COLORS[node.systemType];
-      const radius = node.id === selectedNodeId ? 8 : 6;
+      const isSelected = node.id === selectedNodeId;
+      const isDrawSource = node.id === drawingFrom;
+      const radius = isSelected || isDrawSource ? 10 : NODE_RADIUS;
 
-      // Glow for selected
-      if (node.id === selectedNodeId) {
+      // Glow for selected / draw source
+      if (isSelected || isDrawSource) {
         ctx.beginPath();
-        ctx.arc(p.x, p.y, 14, 0, Math.PI * 2);
-        ctx.fillStyle = color + '22';
+        ctx.arc(p.x, p.y, 16, 0, Math.PI * 2);
+        ctx.fillStyle = (isDrawSource ? '#fbbf24' : color) + '22';
         ctx.fill();
       }
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = color;
+      ctx.fillStyle = isDrawSource ? '#fbbf24' : color;
       ctx.fill();
-      ctx.strokeStyle = node.id === selectedNodeId ? '#fff' : '#000';
+      ctx.strokeStyle = isSelected ? '#fff' : isDrawSource ? '#fbbf24' : '#000';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
       // Label
       ctx.fillStyle = '#9ca3af';
       ctx.font = '9px system-ui';
-      ctx.fillText(node.name, p.x + 10, p.y + 3);
+      ctx.fillText(node.name, p.x + 12, p.y + 3);
     });
   }, [size, pan, scale, floor, nodes, pipes, allNodes, selectedNodeId, drawingFrom, mousePos, toCanvas]);
 
-  // Event handlers
+  // Hit test
+  const findNodeAt = useCallback((cx: number, cy: number): SystemNodeConfig | null => {
+    for (const node of nodes) {
+      const p = toCanvas(node.position.x, node.position.z);
+      const dx = cx - p.x;
+      const dy = cy - p.y;
+      if (dx * dx + dy * dy < NODE_HIT_RADIUS * NODE_HIT_RADIUS) return node;
+    }
+    return null;
+  }, [nodes, toCanvas]);
+
+  // Event pos helpers
   const getPos = (e: React.MouseEvent) => {
     const rect = canvasRef.current!.getBoundingClientRect();
     return { x: e.clientX - rect.left, y: e.clientY - rect.top };
   };
 
-  const findNodeAt = (cx: number, cy: number): SystemNodeConfig | null => {
-    for (const node of nodes) {
-      const p = toCanvas(node.position.x, node.position.z);
-      const dx = cx - p.x;
-      const dy = cy - p.y;
-      if (dx * dx + dy * dy < 144) return node;
-    }
-    return null;
+  const getTouchPos = (e: React.TouchEvent) => {
+    const rect = canvasRef.current!.getBoundingClientRect();
+    const t = e.touches[0];
+    return { x: t.clientX - rect.left, y: t.clientY - rect.top };
   };
 
+  // Mouse handlers
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     const pos = getPos(e);
 
-    // Middle click pan
     if (e.button === 1) {
       isPanning.current = true;
       panStart.current = { mx: pos.x, my: pos.y, px: pan.x, py: pan.y };
@@ -236,7 +248,6 @@ export default function FloorPlanCanvas({
         onNodeClick(hitNode.id);
         return;
       }
-      // Start drag after small movement
       setDraggingNodeId(hitNode.id);
       onNodeClick(hitNode.id);
       return;
@@ -248,7 +259,7 @@ export default function FloorPlanCanvas({
       onPlaceNode(wx, wz);
       longPressTimer.current = null;
     }, 500);
-  }, [pan, scale, nodes, drawingFrom, onNodeClick, onPlaceNode, onStartDrawing, toCanvas, toWorld]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [pan, findNodeAt, drawingFrom, onNodeClick, onPlaceNode, onStartDrawing, toWorld]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     const pos = getPos(e);
@@ -262,11 +273,9 @@ export default function FloorPlanCanvas({
       return;
     }
 
-    // Cancel long press if moved too far
     if (longPressTimer.current) {
       clearTimeout(longPressTimer.current);
       longPressTimer.current = null;
-      // Start panning instead
       isPanning.current = true;
       panStart.current = { mx: pos.x, my: pos.y, px: pan.x, py: pan.y };
       return;
@@ -291,7 +300,6 @@ export default function FloorPlanCanvas({
     const pos = getPos(e);
     const factor = e.deltaY > 0 ? 0.9 : 1.1;
     const newScale = Math.max(0.3, Math.min(15, scale * factor));
-    // Zoom toward cursor
     const dx = pos.x - pan.x;
     const dy = pos.y - pan.y;
     setPan({
@@ -301,6 +309,110 @@ export default function FloorPlanCanvas({
     setScale(newScale);
   }, [pan, scale]);
 
+  // Touch handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      // Pinch zoom
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const rect = canvasRef.current!.getBoundingClientRect();
+      const cx = (e.touches[0].clientX + e.touches[1].clientX) / 2 - rect.left;
+      const cy = (e.touches[0].clientY + e.touches[1].clientY) / 2 - rect.top;
+      pinchStart.current = { dist: Math.sqrt(dx * dx + dy * dy), scale, cx, cy };
+      if (longPressTimer.current) {
+        clearTimeout(longPressTimer.current);
+        longPressTimer.current = null;
+      }
+      return;
+    }
+
+    if (e.touches.length === 1) {
+      const pos = getTouchPos(e);
+      const hitNode = findNodeAt(pos.x, pos.y);
+
+      if (hitNode) {
+        e.preventDefault();
+        if (drawingFrom) {
+          onNodeClick(hitNode.id);
+        } else {
+          setDraggingNodeId(hitNode.id);
+          onNodeClick(hitNode.id);
+        }
+        return;
+      }
+
+      // Long press to place node
+      longPressPos.current = pos;
+      longPressTimer.current = setTimeout(() => {
+        const [wx, wz] = toWorld(pos.x, pos.y);
+        onPlaceNode(wx, wz);
+        longPressTimer.current = null;
+        longPressPos.current = null;
+      }, 500);
+    }
+  }, [findNodeAt, drawingFrom, onNodeClick, onPlaceNode, toWorld, scale]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 2 && pinchStart.current) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const newScale = Math.max(0.3, Math.min(15, pinchStart.current.scale * (dist / pinchStart.current.dist)));
+      // Zoom toward pinch center
+      const dxP = pinchStart.current.cx - pan.x;
+      const dyP = pinchStart.current.cy - pan.y;
+      setPan({
+        x: pinchStart.current.cx - dxP * (newScale / scale),
+        y: pinchStart.current.cy - dyP * (newScale / scale),
+      });
+      setScale(newScale);
+      return;
+    }
+
+    if (e.touches.length === 1) {
+      const pos = getTouchPos(e);
+
+      // Cancel long press if moved too far
+      if (longPressTimer.current && longPressPos.current) {
+        const dx = pos.x - longPressPos.current.x;
+        const dy = pos.y - longPressPos.current.y;
+        if (dx * dx + dy * dy > 100) {
+          clearTimeout(longPressTimer.current);
+          longPressTimer.current = null;
+          // Start panning
+          isPanning.current = true;
+          panStart.current = { mx: longPressPos.current.x, my: longPressPos.current.y, px: pan.x, py: pan.y };
+          longPressPos.current = null;
+        }
+      }
+
+      if (draggingNodeId) {
+        e.preventDefault();
+        const [wx, wz] = toWorld(pos.x, pos.y);
+        onMoveNode(draggingNodeId, wx, wz);
+      } else if (isPanning.current) {
+        setPan({
+          x: panStart.current.px + (pos.x - panStart.current.mx),
+          y: panStart.current.py + (pos.y - panStart.current.my),
+        });
+      }
+
+      setMousePos(pos);
+    }
+  }, [pan, scale, draggingNodeId, onMoveNode, toWorld]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (longPressTimer.current) {
+      clearTimeout(longPressTimer.current);
+      longPressTimer.current = null;
+    }
+    longPressPos.current = null;
+    isPanning.current = false;
+    pinchStart.current = null;
+    setDraggingNodeId(null);
+  }, []);
+
   // Keyboard handler for delete
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -308,9 +420,8 @@ export default function FloorPlanCanvas({
         onDeleteNode(selectedNodeId);
       }
       if (e.key === 'Escape') {
-        // Cancel drawing
         if (drawingFrom) {
-          onNodeClick('__cancel__'); // no-op, just to reset
+          onNodeClick('__cancel__');
         }
       }
     };
@@ -324,12 +435,15 @@ export default function FloorPlanCanvas({
         ref={canvasRef}
         width={size.w}
         height={size.h}
-        className="cursor-crosshair"
+        className="cursor-crosshair touch-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onWheel={handleWheel}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         onContextMenu={(e) => e.preventDefault()}
       />
     </div>

@@ -8,16 +8,38 @@ interface Props {
 }
 
 const GRID_SIZE = 10; // snap grid in feet
-const CANVAS_W = 600;
-const CANVAS_H = 400;
+const VERTEX_RADIUS = 10; // touch-friendly radius (min 20px diameter)
+const VERTEX_HIT_RADIUS = 20; // hit test area for touch
 
 export default function FloorShapeEditor({ outline, onChange }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState({ w: 600, h: 400 });
   const [draggingIdx, setDraggingIdx] = useState<number | null>(null);
-  const [pan, setPan] = useState({ x: CANVAS_W / 2, y: CANVAS_H / 2 });
-  const [scale, setScale] = useState(2); // pixels per foot
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [scale, setScale] = useState(2);
   const [isPanning, setIsPanning] = useState(false);
   const panStart = useRef({ x: 0, y: 0, panX: 0, panY: 0 });
+  const pinchStart = useRef<{ dist: number; scale: number } | null>(null);
+
+  // Resize observer for responsive canvas
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const obs = new ResizeObserver((entries) => {
+      const { width } = entries[0].contentRect;
+      const w = Math.floor(width);
+      const h = Math.min(400, Math.floor(width * 0.66));
+      setSize({ w, h });
+    });
+    obs.observe(container);
+    return () => obs.disconnect();
+  }, []);
+
+  // Center pan on mount/resize
+  useEffect(() => {
+    setPan({ x: size.w / 2, y: size.h / 2 });
+  }, [size.w, size.h]);
 
   // World → canvas
   const toCanvas = useCallback((wx: number, wz: number) => ({
@@ -39,29 +61,31 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
+    ctx.clearRect(0, 0, size.w, size.h);
 
     // Background
     ctx.fillStyle = '#0a0a12';
-    ctx.fillRect(0, 0, CANVAS_W, CANVAS_H);
+    ctx.fillRect(0, 0, size.w, size.h);
 
     // Grid
     ctx.strokeStyle = '#1a1a2e';
     ctx.lineWidth = 0.5;
     const gridPx = GRID_SIZE * scale;
-    const startX = pan.x % gridPx;
-    const startY = pan.y % gridPx;
-    for (let x = startX; x < CANVAS_W; x += gridPx) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, CANVAS_H);
-      ctx.stroke();
-    }
-    for (let y = startY; y < CANVAS_H; y += gridPx) {
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(CANVAS_W, y);
-      ctx.stroke();
+    if (gridPx > 4) {
+      const startX = ((pan.x % gridPx) + gridPx) % gridPx;
+      const startY = ((pan.y % gridPx) + gridPx) % gridPx;
+      for (let x = startX; x < size.w; x += gridPx) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, size.h);
+        ctx.stroke();
+      }
+      for (let y = startY; y < size.h; y += gridPx) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(size.w, y);
+        ctx.stroke();
+      }
     }
 
     // Origin crosshair
@@ -69,9 +93,9 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.moveTo(pan.x, 0);
-    ctx.lineTo(pan.x, CANVAS_H);
+    ctx.lineTo(pan.x, size.h);
     ctx.moveTo(0, pan.y);
-    ctx.lineTo(CANVAS_W, pan.y);
+    ctx.lineTo(size.w, pan.y);
     ctx.stroke();
 
     // Polygon fill
@@ -108,11 +132,11 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
       }
     }
 
-    // Vertices
+    // Vertices - larger for touch
     outline.forEach((pt, i) => {
       const p = toCanvas(pt[0], pt[1]);
       ctx.beginPath();
-      ctx.arc(p.x, p.y, 5, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, VERTEX_RADIUS, 0, Math.PI * 2);
       ctx.fillStyle = draggingIdx === i ? '#60a5fa' : '#3b82f6';
       ctx.fill();
       ctx.strokeStyle = '#1e3a5f';
@@ -122,14 +146,30 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
       // Coordinate label
       ctx.fillStyle = '#9ca3af';
       ctx.font = '9px monospace';
-      ctx.fillText(`${pt[0]},${pt[1]}`, p.x + 8, p.y - 8);
+      ctx.fillText(`${pt[0]},${pt[1]}`, p.x + 12, p.y - 8);
     });
-  }, [outline, pan, scale, toCanvas, draggingIdx]);
+  }, [outline, pan, scale, toCanvas, draggingIdx, size]);
 
   // Mouse handlers
   const getMousePos = (e: React.MouseEvent) => {
     const rect = canvasRef.current!.getBoundingClientRect();
     return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  };
+
+  const getTouchPos = (e: React.TouchEvent) => {
+    const rect = canvasRef.current!.getBoundingClientRect();
+    const touch = e.touches[0];
+    return { x: touch.clientX - rect.left, y: touch.clientY - rect.top };
+  };
+
+  const findVertexAt = (px: number, py: number): number | null => {
+    for (let i = 0; i < outline.length; i++) {
+      const p = toCanvas(outline[i][0], outline[i][1]);
+      const dx = px - p.x;
+      const dy = py - p.y;
+      if (dx * dx + dy * dy < VERTEX_HIT_RADIUS * VERTEX_HIT_RADIUS) return i;
+    }
+    return null;
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -142,15 +182,10 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
       return;
     }
 
-    // Check if clicking a vertex
-    for (let i = 0; i < outline.length; i++) {
-      const p = toCanvas(outline[i][0], outline[i][1]);
-      const dx = pos.x - p.x;
-      const dy = pos.y - p.y;
-      if (dx * dx + dy * dy < 100) {
-        setDraggingIdx(i);
-        return;
-      }
+    const vertIdx = findVertexAt(pos.x, pos.y);
+    if (vertIdx !== null) {
+      setDraggingIdx(vertIdx);
+      return;
     }
 
     // Check if clicking on an edge → insert vertex
@@ -159,7 +194,7 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
       const a = toCanvas(outline[i][0], outline[i][1]);
       const b = toCanvas(outline[j][0], outline[j][1]);
       const dist = pointToSegDist(pos.x, pos.y, a.x, a.y, b.x, b.y);
-      if (dist < 8) {
+      if (dist < 10) {
         const [wx, wz] = toWorld(pos.x, pos.y);
         const newOutline = [...outline];
         newOutline.splice(j, 0, [wx, wz]);
@@ -193,39 +228,105 @@ export default function FloorShapeEditor({ outline, onChange }: Props) {
   };
 
   const handleWheel = (e: React.WheelEvent) => {
-    const newScale = Math.max(0.5, Math.min(10, scale - e.deltaY * 0.002));
+    const pos = getMousePos(e);
+    const factor = e.deltaY > 0 ? 0.9 : 1.1;
+    const newScale = Math.max(0.5, Math.min(10, scale * factor));
+    const dx = pos.x - pan.x;
+    const dy = pos.y - pan.y;
+    setPan({
+      x: pos.x - dx * (newScale / scale),
+      y: pos.y - dy * (newScale / scale),
+    });
     setScale(newScale);
   };
 
-  // Double-click vertex to delete
-  const handleDoubleClick = (e: React.MouseEvent) => {
-    if (outline.length <= 3) return;
-    const pos = getMousePos(e);
-    for (let i = 0; i < outline.length; i++) {
-      const p = toCanvas(outline[i][0], outline[i][1]);
-      const dx = pos.x - p.x;
-      const dy = pos.y - p.y;
-      if (dx * dx + dy * dy < 100) {
-        onChange(outline.filter((_, idx) => idx !== i));
-        return;
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      // Pinch zoom start
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      pinchStart.current = { dist: Math.sqrt(dx * dx + dy * dy), scale };
+      return;
+    }
+
+    if (e.touches.length === 1) {
+      const pos = getTouchPos(e);
+      const vertIdx = findVertexAt(pos.x, pos.y);
+      if (vertIdx !== null) {
+        e.preventDefault();
+        setDraggingIdx(vertIdx);
+      } else {
+        // Start panning
+        setIsPanning(true);
+        panStart.current = { x: pos.x, y: pos.y, panX: pan.x, panY: pan.y };
       }
     }
   };
 
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && pinchStart.current) {
+      e.preventDefault();
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      const newScale = Math.max(0.5, Math.min(10, pinchStart.current.scale * (dist / pinchStart.current.dist)));
+      setScale(newScale);
+      return;
+    }
+
+    if (e.touches.length === 1) {
+      const pos = getTouchPos(e);
+      if (draggingIdx !== null) {
+        e.preventDefault();
+        const [wx, wz] = toWorld(pos.x, pos.y);
+        const newOutline = [...outline];
+        newOutline[draggingIdx] = [wx, wz];
+        onChange(newOutline);
+      } else if (isPanning) {
+        setPan({
+          x: panStart.current.panX + (pos.x - panStart.current.x),
+          y: panStart.current.panY + (pos.y - panStart.current.y),
+        });
+      }
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setDraggingIdx(null);
+    setIsPanning(false);
+    pinchStart.current = null;
+  };
+
+  // Double-click/tap vertex to delete
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    if (outline.length <= 3) return;
+    const pos = getMousePos(e);
+    const vertIdx = findVertexAt(pos.x, pos.y);
+    if (vertIdx !== null) {
+      onChange(outline.filter((_, idx) => idx !== vertIdx));
+    }
+  };
+
   return (
-    <canvas
-      ref={canvasRef}
-      width={CANVAS_W}
-      height={CANVAS_H}
-      className="border border-gray-700 rounded-lg cursor-crosshair"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onWheel={handleWheel}
-      onDoubleClick={handleDoubleClick}
-      onContextMenu={(e) => e.preventDefault()}
-    />
+    <div ref={containerRef} className="w-full">
+      <canvas
+        ref={canvasRef}
+        width={size.w}
+        height={size.h}
+        className="border border-gray-700 rounded-lg cursor-crosshair w-full touch-none"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onWheel={handleWheel}
+        onDoubleClick={handleDoubleClick}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        onContextMenu={(e) => e.preventDefault()}
+      />
+    </div>
   );
 }
 

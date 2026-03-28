@@ -31,29 +31,29 @@ export default function BuildingSelector() {
 
   if (loading) {
     return (
-      <div className="h-8 w-40 bg-gray-800/50 rounded animate-pulse" />
+      <div className="h-10 w-full sm:w-40 bg-gray-800/50 rounded animate-pulse" />
     );
   }
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative w-full sm:w-auto">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-gray-700 bg-[#0d0d18] hover:bg-[#151525] transition-colors text-sm"
+        className="w-full sm:w-auto flex items-center gap-2 px-3 py-2.5 min-h-[44px] rounded-lg border border-gray-700 bg-[#0d0d18] hover:bg-[#151525] transition-colors text-sm"
       >
-        <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+        <svg className="w-4 h-4 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
         </svg>
-        <span className="text-gray-300 max-w-[140px] truncate">
+        <span className="text-gray-300 truncate flex-1 text-left">
           {current?.name || 'Select Building'}
         </span>
-        <svg className={`w-3 h-3 text-gray-500 transition-transform ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className={`w-3 h-3 text-gray-500 transition-transform flex-shrink-0 ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-1 w-64 bg-[#111118] border border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden">
+        <div className="absolute top-full left-0 right-0 sm:right-auto mt-1 w-full sm:w-64 bg-[#111118] border border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden">
           {index.map((b) => (
             <button
               key={b.id}
@@ -61,7 +61,7 @@ export default function BuildingSelector() {
                 setSelectedId(b.id);
                 setOpen(false);
               }}
-              className={`w-full text-left px-4 py-2.5 hover:bg-[#1a1a28] transition-colors border-b border-gray-800/50 last:border-0 ${
+              className={`w-full text-left px-4 py-3 min-h-[44px] hover:bg-[#1a1a28] transition-colors border-b border-gray-800/50 last:border-0 ${
                 b.id === selectedId ? 'bg-blue-600/10' : ''
               }`}
             >
@@ -75,7 +75,7 @@ export default function BuildingSelector() {
               setOpen(false);
               router.push('/buildings');
             }}
-            className="w-full text-left px-4 py-2.5 text-blue-400 hover:bg-blue-600/10 transition-colors text-sm font-medium border-t border-gray-700"
+            className="w-full text-left px-4 py-3 min-h-[44px] text-blue-400 hover:bg-blue-600/10 transition-colors text-sm font-medium border-t border-gray-700"
           >
             + Manage Buildings
           </button>

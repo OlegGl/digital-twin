@@ -86,7 +86,7 @@ export default function Home() {
 
       <button
         onClick={toggleWireframe}
-        className={`absolute top-4 right-16 z-20 h-10 px-3 flex items-center gap-2 rounded-lg border transition-all ${
+        className={`absolute top-4 right-16 z-20 min-w-[44px] min-h-[44px] px-3 flex items-center gap-2 rounded-lg border transition-all ${
           wireframeMode
             ? 'bg-blue-600/20 border-blue-500/50 text-blue-400'
             : 'bg-[#111118] border-gray-700 text-gray-400 hover:bg-[#1a1a28]'
@@ -102,7 +102,7 @@ export default function Home() {
 
       <button
         onClick={() => setShowConfig(!showConfig)}
-        className="absolute top-4 right-4 z-20 w-10 h-10 bg-[#111118] border border-gray-700 rounded-lg flex items-center justify-center hover:bg-[#1a1a28] transition-colors"
+        className="absolute top-4 right-4 z-20 w-11 h-11 min-w-[44px] min-h-[44px] bg-[#111118] border border-gray-700 rounded-lg flex items-center justify-center hover:bg-[#1a1a28] transition-colors"
         title="Building Configuration"
       >
         <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">

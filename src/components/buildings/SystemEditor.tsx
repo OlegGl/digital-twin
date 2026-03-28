@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { BuildingConfig, SystemConfig, SystemNodeConfig, SystemPipeConfig } from '@/lib/buildingSchema';
 import { SensorType, SENSOR_COLORS, SENSOR_LABELS } from '@/types';
 import { generateId } from '@/lib/buildingSchema';
@@ -13,6 +13,17 @@ interface Props {
 
 const SYSTEM_TYPES = Object.values(SensorType);
 
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+  return isMobile;
+}
+
 export default function SystemEditor({ config, onChange }: Props) {
   const [selectedFloorNum, setSelectedFloorNum] = useState<number>(
     config.floors[0]?.number ?? 1,
@@ -20,6 +31,8 @@ export default function SystemEditor({ config, onChange }: Props) {
   const [activeSystemType, setActiveSystemType] = useState<SensorType>(SensorType.HVAC);
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null);
   const [drawingFrom, setDrawingFrom] = useState<string | null>(null);
+  const [propsOpen, setPropsOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   const selectedFloor = config.floors.find((f) => f.number === selectedFloorNum);
 
@@ -61,13 +74,13 @@ export default function SystemEditor({ config, onChange }: Props) {
       );
     });
     setSelectedNodeId(newNode.id);
-  }, [selectedFloor, activeSystemType, updateSystems, ensureSystem]);
+    if (isMobile) setPropsOpen(true);
+  }, [selectedFloor, activeSystemType, updateSystems, ensureSystem, isMobile]);
 
   const handleNodeClick = useCallback((nodeId: string) => {
     if (drawingFrom) {
       // Complete pipe
       if (drawingFrom !== nodeId) {
-        // Find system types to determine pipe type
         const fromNode = config.systems.flatMap((s) => s.nodes).find((n) => n.id === drawingFrom);
         const toNode = config.systems.flatMap((s) => s.nodes).find((n) => n.id === nodeId);
         if (fromNode && toNode) {
@@ -92,14 +105,26 @@ export default function SystemEditor({ config, onChange }: Props) {
         }
       }
       setDrawingFrom(null);
+    } else if (isMobile) {
+      // Mobile: tap to select, second tap to start pipe drawing
+      if (selectedNodeId === nodeId) {
+        // Second tap on same node → start drawing pipe
+        setDrawingFrom(nodeId);
+        setSelectedNodeId(null);
+        setPropsOpen(false);
+      } else {
+        setSelectedNodeId(nodeId);
+        setPropsOpen(true);
+      }
     } else {
       setSelectedNodeId(nodeId);
     }
-  }, [drawingFrom, config.systems, updateSystems, ensureSystem]);
+  }, [drawingFrom, config.systems, updateSystems, ensureSystem, isMobile, selectedNodeId]);
 
   const handleStartDrawing = useCallback((nodeId: string) => {
     setDrawingFrom(nodeId);
     setSelectedNodeId(null);
+    setPropsOpen(false);
   }, []);
 
   const handleMoveNode = useCallback((nodeId: string, x: number, z: number) => {
@@ -122,6 +147,7 @@ export default function SystemEditor({ config, onChange }: Props) {
       })),
     );
     setSelectedNodeId(null);
+    setPropsOpen(false);
   }, [updateSystems]);
 
   const handleDeletePipe = useCallback((pipeId: string) => {
@@ -146,10 +172,113 @@ export default function SystemEditor({ config, onChange }: Props) {
 
   const sortedFloors = [...config.floors].sort((a, b) => a.number - b.number);
 
+  // Properties panel content (shared between mobile bottom sheet and desktop side panel)
+  const propertiesPanel = selectedNode && (
+    <div className="space-y-2">
+      <div>
+        <label className="block text-[10px] text-gray-500 mb-0.5">Name</label>
+        <input
+          value={selectedNode.name}
+          onChange={(e) => {
+            const name = e.target.value;
+            updateSystems((systems) =>
+              systems.map((s) => ({
+                ...s,
+                nodes: s.nodes.map((n) =>
+                  n.id === selectedNode.id ? { ...n, name } : n,
+                ),
+              })),
+            );
+          }}
+          className="w-full px-2 py-2 min-h-[44px] bg-[#0a0a12] border border-gray-700 rounded text-white text-xs focus:outline-none focus:border-blue-500"
+        />
+      </div>
+      <div>
+        <label className="block text-[10px] text-gray-500 mb-0.5">Type</label>
+        <select
+          value={selectedNode.nodeType}
+          onChange={(e) => {
+            const nodeType = e.target.value as SystemNodeConfig['nodeType'];
+            updateSystems((systems) =>
+              systems.map((s) => ({
+                ...s,
+                nodes: s.nodes.map((n) =>
+                  n.id === selectedNode.id ? { ...n, nodeType } : n,
+                ),
+              })),
+            );
+          }}
+          className="w-full px-2 py-2 min-h-[44px] bg-[#0a0a12] border border-gray-700 rounded text-white text-xs focus:outline-none focus:border-blue-500"
+        >
+          {['source', 'junction', 'panel', 'valve', 'meter', 'equipment', 'terminal', 'riser'].map((t) => (
+            <option key={t} value={t}>{t}</option>
+          ))}
+        </select>
+      </div>
+      <div className="text-[10px] text-gray-500">
+        Pos: {Math.round(selectedNode.position.x)}, {Math.round(selectedNode.position.z)}
+      </div>
+      <div className="flex gap-2 pt-1">
+        <button
+          onClick={() => handleStartDrawing(selectedNode.id)}
+          className="flex-1 text-[10px] px-2 py-2 min-h-[44px] bg-blue-600/15 text-blue-400 rounded hover:bg-blue-600/25"
+        >
+          Draw Pipe
+        </button>
+        <button
+          onClick={() => handleDeleteNode(selectedNode.id)}
+          className="text-[10px] px-2 py-2 min-h-[44px] bg-red-600/10 text-red-400 rounded hover:bg-red-600/20"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="flex h-full">
-      {/* Left sidebar: system palette + floor selector */}
-      <div className="w-52 border-r border-gray-800 flex flex-col">
+    <div className="flex flex-col md:flex-row h-full">
+      {/* Mobile: horizontal system palette + floor pills at top */}
+      <div className="md:hidden flex flex-col border-b border-gray-800">
+        {/* System type palette - horizontal scroll */}
+        <div className="flex items-center gap-1.5 px-3 py-2 overflow-x-auto scrollbar-none">
+          {SYSTEM_TYPES.map((type) => (
+            <button
+              key={type}
+              onClick={() => setActiveSystemType(type)}
+              className={`flex items-center gap-1.5 px-3 py-2 min-h-[44px] rounded-lg text-[11px] font-medium transition-colors flex-shrink-0 ${
+                type === activeSystemType
+                  ? 'bg-white/10 ring-1 ring-white/20'
+                  : 'bg-[#0a0a12] border border-gray-800 hover:bg-white/5'
+              }`}
+            >
+              <div
+                className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
+                style={{ backgroundColor: SENSOR_COLORS[type] }}
+              />
+              <span className="text-gray-300">{SENSOR_LABELS[type]}</span>
+            </button>
+          ))}
+        </div>
+        {/* Floor selector - horizontal pills */}
+        <div className="flex items-center gap-1.5 px-3 py-2 overflow-x-auto scrollbar-none border-t border-gray-800/50">
+          {sortedFloors.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setSelectedFloorNum(f.number)}
+              className={`flex-shrink-0 px-3 py-1.5 min-h-[36px] rounded text-xs font-medium transition-colors ${
+                f.number === selectedFloorNum
+                  ? 'bg-blue-600/15 text-blue-400'
+                  : 'text-gray-400 hover:bg-white/5'
+              }`}
+            >
+              F{f.number}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Desktop: Left sidebar */}
+      <div className="hidden md:flex w-52 border-r border-gray-800 flex-col">
         {/* System type palette */}
         <div className="p-3 border-b border-gray-800">
           <span className="text-[10px] text-gray-500 font-medium block mb-2">SYSTEM TYPE</span>
@@ -211,7 +340,16 @@ export default function SystemEditor({ config, onChange }: Props) {
       </div>
 
       {/* Canvas area */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative min-h-0">
+        {/* Mobile mode indicator */}
+        <div className="md:hidden absolute top-2 left-2 z-10 text-[10px] px-2 py-1 bg-[#0d0d18]/80 rounded text-gray-500">
+          {drawingFrom ? (
+            <span className="text-amber-400">Tap target node to draw pipe</span>
+          ) : (
+            'Long-press: place · Tap: select · Double-tap: pipe'
+          )}
+        </div>
+
         <FloorPlanCanvas
           floor={selectedFloor || null}
           nodes={floorNodes}
@@ -227,80 +365,49 @@ export default function SystemEditor({ config, onChange }: Props) {
           onDeletePipe={handleDeletePipe}
         />
 
-        {/* Node properties panel */}
-        {selectedNode && (
+        {/* Desktop: Node properties panel */}
+        {selectedNode && !isMobile && (
           <div className="absolute top-3 right-3 w-56 bg-[#0d0d18] border border-gray-700 rounded-lg p-3 z-10">
             <div className="flex items-center justify-between mb-3">
               <span className="text-xs font-medium text-white">Node Properties</span>
               <button
                 onClick={() => setSelectedNodeId(null)}
-                className="text-gray-500 hover:text-gray-300 text-xs"
+                className="text-gray-500 hover:text-gray-300 text-xs min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 ✕
               </button>
             </div>
-            <div className="space-y-2">
-              <div>
-                <label className="block text-[10px] text-gray-500 mb-0.5">Name</label>
-                <input
-                  value={selectedNode.name}
-                  onChange={(e) => {
-                    const name = e.target.value;
-                    updateSystems((systems) =>
-                      systems.map((s) => ({
-                        ...s,
-                        nodes: s.nodes.map((n) =>
-                          n.id === selectedNode.id ? { ...n, name } : n,
-                        ),
-                      })),
-                    );
-                  }}
-                  className="w-full px-2 py-1 bg-[#0a0a12] border border-gray-700 rounded text-white text-xs focus:outline-none focus:border-blue-500"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] text-gray-500 mb-0.5">Type</label>
-                <select
-                  value={selectedNode.nodeType}
-                  onChange={(e) => {
-                    const nodeType = e.target.value as SystemNodeConfig['nodeType'];
-                    updateSystems((systems) =>
-                      systems.map((s) => ({
-                        ...s,
-                        nodes: s.nodes.map((n) =>
-                          n.id === selectedNode.id ? { ...n, nodeType } : n,
-                        ),
-                      })),
-                    );
-                  }}
-                  className="w-full px-2 py-1 bg-[#0a0a12] border border-gray-700 rounded text-white text-xs focus:outline-none focus:border-blue-500"
-                >
-                  {['source', 'junction', 'panel', 'valve', 'meter', 'equipment', 'terminal', 'riser'].map((t) => (
-                    <option key={t} value={t}>{t}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="text-[10px] text-gray-500">
-                Pos: {Math.round(selectedNode.position.x)}, {Math.round(selectedNode.position.z)}
-              </div>
-              <div className="flex gap-2 pt-1">
-                <button
-                  onClick={() => handleStartDrawing(selectedNode.id)}
-                  className="flex-1 text-[10px] px-2 py-1 bg-blue-600/15 text-blue-400 rounded hover:bg-blue-600/25"
-                >
-                  Draw Pipe
-                </button>
-                <button
-                  onClick={() => handleDeleteNode(selectedNode.id)}
-                  className="text-[10px] px-2 py-1 bg-red-600/10 text-red-400 rounded hover:bg-red-600/20"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+            {propertiesPanel}
           </div>
         )}
       </div>
+
+      {/* Mobile: Bottom sheet for properties */}
+      {isMobile && selectedNode && (
+        <div
+          className={`fixed inset-x-0 bottom-0 z-40 bg-[#0d0d18] border-t border-gray-700 rounded-t-xl transition-transform duration-300 ${
+            propsOpen ? 'translate-y-0' : 'translate-y-full'
+          }`}
+          style={{ maxHeight: '50vh' }}
+        >
+          {/* Handle bar */}
+          <div className="flex justify-center py-2">
+            <div className="w-10 h-1 bg-gray-600 rounded-full" />
+          </div>
+          <div className="px-4 pb-4 overflow-y-auto" style={{ maxHeight: 'calc(50vh - 20px)' }}>
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-xs font-medium text-white">Node Properties</span>
+              <button
+                onClick={() => { setSelectedNodeId(null); setPropsOpen(false); }}
+                className="text-gray-500 hover:text-gray-300 text-xs min-w-[44px] min-h-[44px] flex items-center justify-center"
+              >
+                ✕
+              </button>
+            </div>
+            {propertiesPanel}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

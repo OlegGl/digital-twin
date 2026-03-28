@@ -24,11 +24,11 @@ function ChartGrid({ hvacData, elecData, waterData, secData }: {
   const mounted = useMounted();
 
   const chartCard = (title: string, chart: React.ReactNode) => (
-    <div className="bg-[#111118] rounded-lg border border-gray-800 p-4">
+    <div className="bg-[#111118] rounded-lg border border-gray-800 p-3 sm:p-4">
       <h3 className="text-sm font-medium text-gray-300 mb-3">{title}</h3>
-      <div style={{ width: '100%', height: 192 }}>
+      <div className="w-full h-48 sm:h-48">
         {mounted && (
-          <ResponsiveContainer width="100%" height={192}>
+          <ResponsiveContainer width="100%" height="100%">
             {chart as React.ReactElement}
           </ResponsiveContainer>
         )}
@@ -192,13 +192,13 @@ export default function Dashboard() {
       </div>
 
       {/* Time range selector */}
-      <div className="flex items-center gap-2 mb-6">
-        <span className="text-xs text-gray-500 mr-2">Time Range</span>
+      <div className="flex items-center gap-2 mb-6 overflow-x-auto scrollbar-none">
+        <span className="text-xs text-gray-500 mr-2 flex-shrink-0">Time Range</span>
         {RANGES.map((r, i) => (
           <button
             key={r.label}
             onClick={() => setRangeIdx(i)}
-            className={`px-3 py-1.5 rounded text-xs font-medium transition-colors ${
+            className={`px-3 py-2.5 min-h-[44px] rounded text-xs font-medium transition-colors flex-shrink-0 ${
               i === rangeIdx
                 ? 'bg-blue-600 text-white'
                 : 'bg-[#111118] text-gray-400 hover:text-white border border-gray-800'
@@ -210,7 +210,7 @@ export default function Dashboard() {
       </div>
 
       {/* System cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 mb-6">
         {systemTypes.map((t) => {
           const count = sensorsByType(t).length;
           return (

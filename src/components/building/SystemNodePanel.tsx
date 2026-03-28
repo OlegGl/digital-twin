@@ -133,111 +133,105 @@ function generateNodeTelemetry(nodeId: string, systemType: string): TelemetryPoi
   return points;
 }
 
-const STATUS_COLORS = {
-  good: 'text-green-400',
-  warn: 'text-yellow-400',
-  alert: 'text-red-400',
-};
-
 export default function SystemNodePanel({ node, onClose }: Props) {
   const color = SENSOR_COLORS[node.systemType];
   const metrics = useMemo(() => computeMetrics(node), [node]);
   const telemetry = useMemo(() => generateNodeTelemetry(node.id, node.systemType), [node.id, node.systemType]);
   const specEntries = Object.entries(node.specs);
 
-  return (
-    <div className="absolute top-0 right-0 h-full w-full sm:w-[420px] bg-[#111118]/95 backdrop-blur-md border-l border-gray-800 z-30 overflow-y-auto">
-      <div className="p-4">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
-            <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">
-              {SENSOR_LABELS[node.systemType]}
-            </span>
-            <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-500 uppercase">
-              {node.nodeType}
-            </span>
-          </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
-          >
-            ✕
-          </button>
-        </div>
-
-        <h2 className="text-lg font-semibold text-white mb-1">{node.name}</h2>
-        <p className="text-sm text-gray-500 mb-1">
-          Floor {node.floor === 8 ? 'Penthouse' : node.floor} · Status:{' '}
-          <span className={node.status === 'normal' ? 'text-green-400' : node.status === 'warning' ? 'text-yellow-400' : 'text-red-400'}>
-            {node.status}
+  const content = (
+    <div className="p-4">
+      {/* Header */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full" style={{ backgroundColor: color }} />
+          <span className="text-xs text-gray-400 font-medium uppercase tracking-wider">
+            {SENSOR_LABELS[node.systemType]}
           </span>
-        </p>
-        <p className="text-xs text-gray-600 mb-4 leading-relaxed">{node.description}</p>
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-gray-800 text-gray-500 uppercase">
+            {node.nodeType}
+          </span>
+        </div>
+        <button
+          onClick={onClose}
+          className="w-10 h-10 min-w-[44px] min-h-[44px] flex items-center justify-center rounded hover:bg-white/10 text-gray-400 hover:text-white transition-colors"
+        >
+          ✕
+        </button>
+      </div>
 
-        {/* Live Metrics */}
-        <div className="mb-4">
-          <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-2 font-medium">
-            Live Performance
-          </div>
-          <div className="grid grid-cols-2 gap-2">
-            {metrics.map((m) => (
-              <div key={m.label} className="bg-[#0a0a14] rounded-lg p-3 border border-gray-800">
-                <div className="text-[10px] text-gray-500 mb-1">{m.label}</div>
-                <div className="text-lg font-bold" style={{ color }}>
-                  {m.value}
-                  {m.unit && <span className="text-[10px] text-gray-500 ml-1">{m.unit}</span>}
-                </div>
-                <div className="mt-1.5 h-1 bg-gray-800 rounded-full overflow-hidden">
-                  <div
-                    className="h-full rounded-full transition-all"
-                    style={{
-                      width: `${Math.min(100, m.percent)}%`,
-                      backgroundColor: m.status === 'good' ? color : m.status === 'warn' ? '#eab308' : '#ef4444',
-                    }}
-                  />
-                </div>
+      <h2 className="text-lg font-semibold text-white mb-1">{node.name}</h2>
+      <p className="text-sm text-gray-500 mb-1">
+        Floor {node.floor === 8 ? 'Penthouse' : node.floor} · Status:{' '}
+        <span className={node.status === 'normal' ? 'text-green-400' : node.status === 'warning' ? 'text-yellow-400' : 'text-red-400'}>
+          {node.status}
+        </span>
+      </p>
+      <p className="text-xs text-gray-600 mb-4 leading-relaxed">{node.description}</p>
+
+      {/* Live Metrics */}
+      <div className="mb-4">
+        <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-2 font-medium">
+          Live Performance
+        </div>
+        <div className="grid grid-cols-2 gap-2">
+          {metrics.map((m) => (
+            <div key={m.label} className="bg-[#0a0a14] rounded-lg p-3 border border-gray-800">
+              <div className="text-[10px] text-gray-500 mb-1">{m.label}</div>
+              <div className="text-lg font-bold" style={{ color }}>
+                {m.value}
+                {m.unit && <span className="text-[10px] text-gray-500 ml-1">{m.unit}</span>}
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Telemetry Chart */}
-        <div className="mb-4">
-          <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-2 font-medium">
-            Last 24 Hours
-          </div>
-          <div className="h-40 bg-[#0a0a14] rounded-lg border border-gray-800 p-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={telemetry}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
-                <XAxis
-                  dataKey="timestamp"
-                  tickFormatter={(v) => {
-                    const d = new Date(v);
-                    return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
-                  }}
-                  stroke="#333"
-                  tick={{ fontSize: 9, fill: '#555' }}
-                  interval="preserveStartEnd"
-                />
-                <YAxis stroke="#333" tick={{ fontSize: 9, fill: '#555' }} domain={['auto', 'auto']} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: '#111118', border: '1px solid #333', borderRadius: 8, fontSize: 11 }}
-                  labelFormatter={(v) => new Date(v as string).toLocaleTimeString()}
-                  formatter={(val, _name, props) => {
-                    const pt = props.payload as TelemetryPoint;
-                    return [`${Number(val).toFixed(1)} ${pt.unit}`, node.name];
+              <div className="mt-1.5 h-1 bg-gray-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all"
+                  style={{
+                    width: `${Math.min(100, m.percent)}%`,
+                    backgroundColor: m.status === 'good' ? color : m.status === 'warn' ? '#eab308' : '#ef4444',
                   }}
                 />
-                <Line type="monotone" dataKey="value" stroke={color} strokeWidth={1.5} dot={false} activeDot={{ r: 3, fill: color }} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+              </div>
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* Specifications */}
+      {/* Telemetry Chart */}
+      <div className="mb-4">
+        <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-2 font-medium">
+          Last 24 Hours
+        </div>
+        <div className="h-40 bg-[#0a0a14] rounded-lg border border-gray-800 p-2">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={telemetry}>
+              <CartesianGrid strokeDasharray="3 3" stroke="#1a1a2e" />
+              <XAxis
+                dataKey="timestamp"
+                tickFormatter={(v) => {
+                  const d = new Date(v);
+                  return `${d.getHours()}:${d.getMinutes().toString().padStart(2, '0')}`;
+                }}
+                stroke="#333"
+                tick={{ fontSize: 9, fill: '#555' }}
+                interval="preserveStartEnd"
+              />
+              <YAxis stroke="#333" tick={{ fontSize: 9, fill: '#555' }} domain={['auto', 'auto']} />
+              <Tooltip
+                contentStyle={{ backgroundColor: '#111118', border: '1px solid #333', borderRadius: 8, fontSize: 11 }}
+                labelFormatter={(v) => new Date(v as string).toLocaleTimeString()}
+                formatter={(val, _name, props) => {
+                  const pt = props.payload as TelemetryPoint;
+                  return [`${Number(val).toFixed(1)} ${pt.unit}`, node.name];
+                }}
+              />
+              <Line type="monotone" dataKey="value" stroke={color} strokeWidth={1.5} dot={false} activeDot={{ r: 3, fill: color }} />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+
+      {/* Specifications */}
+      {specEntries.length > 0 && (
         <div>
           <div className="text-[10px] uppercase tracking-wider text-gray-500 mb-2 font-medium">
             Specifications
@@ -256,7 +250,24 @@ export default function SystemNodePanel({ node, onClose }: Props) {
             ))}
           </div>
         </div>
-      </div>
+      )}
     </div>
+  );
+
+  return (
+    <>
+      {/* Desktop: side panel */}
+      <div className="hidden sm:block absolute top-0 right-0 h-full w-full sm:w-[420px] bg-[#111118]/95 backdrop-blur-md border-l border-gray-800 z-30 overflow-y-auto">
+        {content}
+      </div>
+
+      {/* Mobile: bottom sheet */}
+      <div className="sm:hidden fixed inset-x-0 bottom-0 z-30 bg-[#111118]/95 backdrop-blur-md border-t border-gray-800 rounded-t-xl max-h-[75vh] overflow-y-auto">
+        <div className="flex justify-center py-2">
+          <div className="w-10 h-1 bg-gray-600 rounded-full" />
+        </div>
+        {content}
+      </div>
+    </>
   );
 }
