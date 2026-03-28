@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Sensor, SensorType, SystemNode } from '@/types';
+import { Sensor, SensorType, SystemNode, MEPSystem } from '@/types';
+import { useSelectedBuildingId } from '@/lib/buildingStore';
+import type { BuildingConfig } from '@/lib/buildingSchema';
 import Legend from '@/components/building/Legend';
 import SensorPanel from '@/components/building/SensorPanel';
 import SystemNodePanel from '@/components/building/SystemNodePanel';
@@ -25,14 +27,22 @@ export default function Home() {
   const [showConfig, setShowConfig] = useState(false);
   const [wireframeMode, setWireframeMode] = useState(false);
   const [visibleSystems, setVisibleSystems] = useState<Set<SensorType>>(new Set(MEP_TYPES));
+  const [selectedId] = useSelectedBuildingId();
+  const [buildingConfig, setBuildingConfig] = useState<BuildingConfig | null>(null);
+
+  // Load building config when selection changes
+  useEffect(() => {
+    const id = selectedId || 'cascade-commons';
+    fetch(`/api/buildings/${id}`)
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => setBuildingConfig(data))
+      .catch(() => setBuildingConfig(null));
+  }, [selectedId]);
 
   const toggleWireframe = useCallback(() => {
     setWireframeMode((prev) => {
-      if (!prev) {
-        setSelectedSensor(null);
-      } else {
-        setSelectedNode(null);
-      }
+      if (!prev) setSelectedSensor(null);
+      else setSelectedNode(null);
       return !prev;
     });
   }, []);
@@ -40,11 +50,8 @@ export default function Home() {
   const toggleSystem = useCallback((type: SensorType) => {
     setVisibleSystems((prev) => {
       const next = new Set(prev);
-      if (next.has(type)) {
-        next.delete(type);
-      } else {
-        next.add(type);
-      }
+      if (next.has(type)) next.delete(type);
+      else next.add(type);
       return next;
     });
   }, []);
@@ -60,6 +67,7 @@ export default function Home() {
         wireframeMode={wireframeMode}
         visibleSystems={visibleSystems}
         onNodeSelect={handleNodeSelect}
+        buildingConfig={buildingConfig}
       />
 
       <Legend
@@ -76,7 +84,6 @@ export default function Home() {
         <SystemNodePanel node={selectedNode} onClose={() => setSelectedNode(null)} />
       )}
 
-      {/* Wireframe / X-Ray toggle */}
       <button
         onClick={toggleWireframe}
         className={`absolute top-4 right-16 z-20 h-10 px-3 flex items-center gap-2 rounded-lg border transition-all ${
@@ -93,7 +100,6 @@ export default function Home() {
         <span className="text-xs font-medium hidden sm:inline">X-Ray</span>
       </button>
 
-      {/* Config button */}
       <button
         onClick={() => setShowConfig(!showConfig)}
         className="absolute top-4 right-4 z-20 w-10 h-10 bg-[#111118] border border-gray-700 rounded-lg flex items-center justify-center hover:bg-[#1a1a28] transition-colors"

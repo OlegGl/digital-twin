@@ -1,0 +1,6294 @@
+{
+  "id": "cascade-commons",
+  "name": "Cascade Commons",
+  "address": "1200 Pacific Avenue, Seattle, WA 98101",
+  "type": "mixed-use",
+  "createdAt": "2026-03-28T06:32:57.320Z",
+  "updatedAt": "2026-03-28T06:32:57.320Z",
+  "defaultView": {
+    "cameraPosition": [
+      250,
+      150,
+      250
+    ],
+    "cameraTarget": [
+      0,
+      40,
+      0
+    ]
+  },
+  "floors": [
+    {
+      "id": "f1",
+      "number": 1,
+      "name": "Safeway",
+      "type": "commercial",
+      "height": 20,
+      "outline": [
+        [
+          -75,
+          -150
+        ],
+        [
+          75,
+          -150
+        ],
+        [
+          75,
+          150
+        ],
+        [
+          -75,
+          150
+        ]
+      ],
+      "sqft": 45000,
+      "sensors": [
+        {
+          "id": "s1-hvac-1",
+          "name": "HVAC Zone A (Produce)",
+          "type": "HVAC",
+          "position": {
+            "x": -50,
+            "y": 10,
+            "z": -100
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s1-hvac-2",
+          "name": "HVAC Zone B (Deli)",
+          "type": "HVAC",
+          "position": {
+            "x": 50,
+            "y": 10,
+            "z": -100
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s1-hvac-3",
+          "name": "HVAC Zone C (Aisles)",
+          "type": "HVAC",
+          "position": {
+            "x": -30,
+            "y": 10,
+            "z": 50
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s1-hvac-4",
+          "name": "HVAC Zone D (Bakery)",
+          "type": "HVAC",
+          "position": {
+            "x": 50,
+            "y": 10,
+            "z": 80
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s1-elec-1",
+          "name": "Main Electrical Panel",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -70,
+            "y": 10,
+            "z": -140
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 400,
+          "status": "normal"
+        },
+        {
+          "id": "s1-elec-2",
+          "name": "Refrigeration Panel",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 60,
+            "y": 10,
+            "z": -50
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 250,
+          "status": "normal"
+        },
+        {
+          "id": "s1-elec-3",
+          "name": "Lighting Panel",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 0,
+            "y": 10,
+            "z": 130
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s1-fire-1",
+          "name": "Smoke Detector Entrance",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 18,
+            "z": -145
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s1-fire-2",
+          "name": "Smoke Detector Aisle 1",
+          "type": "FIRE",
+          "position": {
+            "x": -40,
+            "y": 18,
+            "z": -50
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s1-fire-3",
+          "name": "Smoke Detector Aisle 5",
+          "type": "FIRE",
+          "position": {
+            "x": 40,
+            "y": 18,
+            "z": -50
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s1-fire-4",
+          "name": "Sprinkler Zone A",
+          "type": "FIRE",
+          "position": {
+            "x": -50,
+            "y": 18,
+            "z": 50
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s1-fire-5",
+          "name": "Sprinkler Zone B",
+          "type": "FIRE",
+          "position": {
+            "x": 50,
+            "y": 18,
+            "z": 50
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s1-fire-6",
+          "name": "Fire Alarm Panel",
+          "type": "FIRE",
+          "position": {
+            "x": -70,
+            "y": 10,
+            "z": -130
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s1-water-1",
+          "name": "Main Water Meter",
+          "type": "WATER",
+          "position": {
+            "x": -70,
+            "y": 5,
+            "z": 0
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s1-water-2",
+          "name": "Hot Water Heater",
+          "type": "WATER",
+          "position": {
+            "x": 65,
+            "y": 5,
+            "z": 100
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 30,
+          "status": "normal"
+        },
+        {
+          "id": "s1-sec-1",
+          "name": "Main Entrance Access",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 10,
+            "z": -148
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s1-sec-2",
+          "name": "Loading Dock Camera",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 10,
+            "z": 148
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s1-sec-3",
+          "name": "Emergency Exit Sensor",
+          "type": "SECURITY",
+          "position": {
+            "x": -74,
+            "y": 10,
+            "z": 0
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s1-light-1",
+          "name": "Storefront Lighting",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 18,
+            "z": -140
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 1000,
+          "status": "normal"
+        },
+        {
+          "id": "s1-light-2",
+          "name": "Aisle Lighting North",
+          "type": "LIGHTING",
+          "position": {
+            "x": -30,
+            "y": 18,
+            "z": -30
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 800,
+          "status": "normal"
+        },
+        {
+          "id": "s1-light-3",
+          "name": "Aisle Lighting South",
+          "type": "LIGHTING",
+          "position": {
+            "x": 30,
+            "y": 18,
+            "z": 60
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 800,
+          "status": "normal"
+        },
+        {
+          "id": "s1-light-4",
+          "name": "Back Office Lighting",
+          "type": "LIGHTING",
+          "position": {
+            "x": 60,
+            "y": 18,
+            "z": 130
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 600,
+          "status": "normal"
+        },
+        {
+          "id": "s1-gas-1",
+          "name": "Bakery Gas Meter",
+          "type": "GAS",
+          "position": {
+            "x": 50,
+            "y": 5,
+            "z": 90
+          },
+          "unit": "therms",
+          "min": 0,
+          "max": 10,
+          "status": "normal"
+        },
+        {
+          "id": "s1-gas-2",
+          "name": "Deli Gas Meter",
+          "type": "GAS",
+          "position": {
+            "x": 50,
+            "y": 5,
+            "z": -110
+          },
+          "unit": "therms",
+          "min": 0,
+          "max": 10,
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "id": "f2",
+      "number": 2,
+      "name": "Residential Floor 2",
+      "type": "residential",
+      "height": 10,
+      "outline": [
+        [
+          -40,
+          -100
+        ],
+        [
+          40,
+          -100
+        ],
+        [
+          40,
+          100
+        ],
+        [
+          -40,
+          100
+        ]
+      ],
+      "sqft": 12000,
+      "sensors": [
+        {
+          "id": "s2-hvac-1",
+          "name": "HVAC Unit 2A",
+          "type": "HVAC",
+          "position": {
+            "x": -25,
+            "y": 25,
+            "z": -60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s2-hvac-2",
+          "name": "HVAC Unit 2B",
+          "type": "HVAC",
+          "position": {
+            "x": 25,
+            "y": 25,
+            "z": 0
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s2-hvac-3",
+          "name": "HVAC Unit 2C",
+          "type": "HVAC",
+          "position": {
+            "x": -10,
+            "y": 25,
+            "z": 60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s2-elec-1",
+          "name": "Electrical Panel 2A",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -38,
+            "y": 25,
+            "z": -80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s2-elec-2",
+          "name": "Electrical Panel 2B",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 38,
+            "y": 25,
+            "z": 80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s2-fire-1",
+          "name": "Smoke Detector 2 Hall",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 28,
+            "z": -70
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s2-fire-2",
+          "name": "Smoke Detector 2 East",
+          "type": "FIRE",
+          "position": {
+            "x": 30,
+            "y": 28,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s2-fire-3",
+          "name": "Sprinkler 2 West",
+          "type": "FIRE",
+          "position": {
+            "x": -30,
+            "y": 28,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s2-fire-4",
+          "name": "Fire Alarm 2",
+          "type": "FIRE",
+          "position": {
+            "x": -38,
+            "y": 25,
+            "z": -90
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s2-water-1",
+          "name": "Water Riser 2",
+          "type": "WATER",
+          "position": {
+            "x": 38,
+            "y": 22,
+            "z": -90
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 20,
+          "status": "normal"
+        },
+        {
+          "id": "s2-elev-1",
+          "name": "Elevator 2",
+          "type": "ELEVATOR",
+          "position": {
+            "x": 0,
+            "y": 25,
+            "z": -90
+          },
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s2-sec-1",
+          "name": "Hallway Access 2",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 25,
+            "z": -95
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s2-sec-2",
+          "name": "Stairwell 2",
+          "type": "SECURITY",
+          "position": {
+            "x": -38,
+            "y": 25,
+            "z": 90
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s2-light-1",
+          "name": "Hallway Lights 2",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 28,
+            "z": 0
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        },
+        {
+          "id": "s2-light-2",
+          "name": "Common Area 2",
+          "type": "LIGHTING",
+          "position": {
+            "x": 20,
+            "y": 28,
+            "z": -50
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "id": "f3",
+      "number": 3,
+      "name": "Residential Floor 3",
+      "type": "residential",
+      "height": 10,
+      "outline": [
+        [
+          -40,
+          -100
+        ],
+        [
+          40,
+          -100
+        ],
+        [
+          40,
+          100
+        ],
+        [
+          -40,
+          100
+        ]
+      ],
+      "sqft": 12000,
+      "sensors": [
+        {
+          "id": "s3-hvac-1",
+          "name": "HVAC Unit 3A",
+          "type": "HVAC",
+          "position": {
+            "x": -25,
+            "y": 35,
+            "z": -60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s3-hvac-2",
+          "name": "HVAC Unit 3B",
+          "type": "HVAC",
+          "position": {
+            "x": 25,
+            "y": 35,
+            "z": 0
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s3-hvac-3",
+          "name": "HVAC Unit 3C",
+          "type": "HVAC",
+          "position": {
+            "x": -10,
+            "y": 35,
+            "z": 60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s3-elec-1",
+          "name": "Electrical Panel 3A",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -38,
+            "y": 35,
+            "z": -80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s3-elec-2",
+          "name": "Electrical Panel 3B",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 38,
+            "y": 35,
+            "z": 80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s3-fire-1",
+          "name": "Smoke Detector 3 Hall",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 38,
+            "z": -70
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s3-fire-2",
+          "name": "Smoke Detector 3 East",
+          "type": "FIRE",
+          "position": {
+            "x": 30,
+            "y": 38,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s3-fire-3",
+          "name": "Sprinkler 3 West",
+          "type": "FIRE",
+          "position": {
+            "x": -30,
+            "y": 38,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s3-fire-4",
+          "name": "Fire Alarm 3",
+          "type": "FIRE",
+          "position": {
+            "x": -38,
+            "y": 35,
+            "z": -90
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s3-water-1",
+          "name": "Water Riser 3",
+          "type": "WATER",
+          "position": {
+            "x": 38,
+            "y": 32,
+            "z": -90
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 20,
+          "status": "normal"
+        },
+        {
+          "id": "s3-elev-1",
+          "name": "Elevator 3",
+          "type": "ELEVATOR",
+          "position": {
+            "x": 0,
+            "y": 35,
+            "z": -90
+          },
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s3-sec-1",
+          "name": "Hallway Access 3",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 35,
+            "z": -95
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s3-sec-2",
+          "name": "Stairwell 3",
+          "type": "SECURITY",
+          "position": {
+            "x": -38,
+            "y": 35,
+            "z": 90
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s3-light-1",
+          "name": "Hallway Lights 3",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 38,
+            "z": 0
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        },
+        {
+          "id": "s3-light-2",
+          "name": "Common Area 3",
+          "type": "LIGHTING",
+          "position": {
+            "x": 20,
+            "y": 38,
+            "z": -50
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "id": "f4",
+      "number": 4,
+      "name": "Residential Floor 4",
+      "type": "residential",
+      "height": 10,
+      "outline": [
+        [
+          -40,
+          -100
+        ],
+        [
+          40,
+          -100
+        ],
+        [
+          40,
+          100
+        ],
+        [
+          -40,
+          100
+        ]
+      ],
+      "sqft": 12000,
+      "sensors": [
+        {
+          "id": "s4-hvac-1",
+          "name": "HVAC Unit 4A",
+          "type": "HVAC",
+          "position": {
+            "x": -25,
+            "y": 45,
+            "z": -60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s4-hvac-2",
+          "name": "HVAC Unit 4B",
+          "type": "HVAC",
+          "position": {
+            "x": 25,
+            "y": 45,
+            "z": 0
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s4-hvac-3",
+          "name": "HVAC Unit 4C",
+          "type": "HVAC",
+          "position": {
+            "x": -10,
+            "y": 45,
+            "z": 60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s4-elec-1",
+          "name": "Electrical Panel 4A",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -38,
+            "y": 45,
+            "z": -80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s4-elec-2",
+          "name": "Electrical Panel 4B",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 38,
+            "y": 45,
+            "z": 80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s4-fire-1",
+          "name": "Smoke Detector 4 Hall",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 48,
+            "z": -70
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s4-fire-2",
+          "name": "Smoke Detector 4 East",
+          "type": "FIRE",
+          "position": {
+            "x": 30,
+            "y": 48,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s4-fire-3",
+          "name": "Sprinkler 4 West",
+          "type": "FIRE",
+          "position": {
+            "x": -30,
+            "y": 48,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s4-fire-4",
+          "name": "Fire Alarm 4",
+          "type": "FIRE",
+          "position": {
+            "x": -38,
+            "y": 45,
+            "z": -90
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s4-water-1",
+          "name": "Water Riser 4",
+          "type": "WATER",
+          "position": {
+            "x": 38,
+            "y": 42,
+            "z": -90
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 20,
+          "status": "normal"
+        },
+        {
+          "id": "s4-elev-1",
+          "name": "Elevator 4",
+          "type": "ELEVATOR",
+          "position": {
+            "x": 0,
+            "y": 45,
+            "z": -90
+          },
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s4-sec-1",
+          "name": "Hallway Access 4",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 45,
+            "z": -95
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s4-sec-2",
+          "name": "Stairwell 4",
+          "type": "SECURITY",
+          "position": {
+            "x": -38,
+            "y": 45,
+            "z": 90
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s4-light-1",
+          "name": "Hallway Lights 4",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 48,
+            "z": 0
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        },
+        {
+          "id": "s4-light-2",
+          "name": "Common Area 4",
+          "type": "LIGHTING",
+          "position": {
+            "x": 20,
+            "y": 48,
+            "z": -50
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "id": "f5",
+      "number": 5,
+      "name": "Residential Floor 5",
+      "type": "residential",
+      "height": 10,
+      "outline": [
+        [
+          -40,
+          -100
+        ],
+        [
+          40,
+          -100
+        ],
+        [
+          40,
+          100
+        ],
+        [
+          -40,
+          100
+        ]
+      ],
+      "sqft": 12000,
+      "sensors": [
+        {
+          "id": "s5-hvac-1",
+          "name": "HVAC Unit 5A",
+          "type": "HVAC",
+          "position": {
+            "x": -25,
+            "y": 55,
+            "z": -60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s5-hvac-2",
+          "name": "HVAC Unit 5B",
+          "type": "HVAC",
+          "position": {
+            "x": 25,
+            "y": 55,
+            "z": 0
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s5-hvac-3",
+          "name": "HVAC Unit 5C",
+          "type": "HVAC",
+          "position": {
+            "x": -10,
+            "y": 55,
+            "z": 60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s5-elec-1",
+          "name": "Electrical Panel 5A",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -38,
+            "y": 55,
+            "z": -80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s5-elec-2",
+          "name": "Electrical Panel 5B",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 38,
+            "y": 55,
+            "z": 80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s5-fire-1",
+          "name": "Smoke Detector 5 Hall",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 58,
+            "z": -70
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s5-fire-2",
+          "name": "Smoke Detector 5 East",
+          "type": "FIRE",
+          "position": {
+            "x": 30,
+            "y": 58,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s5-fire-3",
+          "name": "Sprinkler 5 West",
+          "type": "FIRE",
+          "position": {
+            "x": -30,
+            "y": 58,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s5-fire-4",
+          "name": "Fire Alarm 5",
+          "type": "FIRE",
+          "position": {
+            "x": -38,
+            "y": 55,
+            "z": -90
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s5-water-1",
+          "name": "Water Riser 5",
+          "type": "WATER",
+          "position": {
+            "x": 38,
+            "y": 52,
+            "z": -90
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 20,
+          "status": "normal"
+        },
+        {
+          "id": "s5-elev-1",
+          "name": "Elevator 5",
+          "type": "ELEVATOR",
+          "position": {
+            "x": 0,
+            "y": 55,
+            "z": -90
+          },
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s5-sec-1",
+          "name": "Hallway Access 5",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 55,
+            "z": -95
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s5-sec-2",
+          "name": "Stairwell 5",
+          "type": "SECURITY",
+          "position": {
+            "x": -38,
+            "y": 55,
+            "z": 90
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s5-light-1",
+          "name": "Hallway Lights 5",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 58,
+            "z": 0
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        },
+        {
+          "id": "s5-light-2",
+          "name": "Common Area 5",
+          "type": "LIGHTING",
+          "position": {
+            "x": 20,
+            "y": 58,
+            "z": -50
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "id": "f6",
+      "number": 6,
+      "name": "Residential Floor 6",
+      "type": "residential",
+      "height": 10,
+      "outline": [
+        [
+          -40,
+          -100
+        ],
+        [
+          40,
+          -100
+        ],
+        [
+          40,
+          100
+        ],
+        [
+          -40,
+          100
+        ]
+      ],
+      "sqft": 12000,
+      "sensors": [
+        {
+          "id": "s6-hvac-1",
+          "name": "HVAC Unit 6A",
+          "type": "HVAC",
+          "position": {
+            "x": -25,
+            "y": 65,
+            "z": -60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s6-hvac-2",
+          "name": "HVAC Unit 6B",
+          "type": "HVAC",
+          "position": {
+            "x": 25,
+            "y": 65,
+            "z": 0
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s6-hvac-3",
+          "name": "HVAC Unit 6C",
+          "type": "HVAC",
+          "position": {
+            "x": -10,
+            "y": 65,
+            "z": 60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s6-elec-1",
+          "name": "Electrical Panel 6A",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -38,
+            "y": 65,
+            "z": -80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s6-elec-2",
+          "name": "Electrical Panel 6B",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 38,
+            "y": 65,
+            "z": 80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s6-fire-1",
+          "name": "Smoke Detector 6 Hall",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 68,
+            "z": -70
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s6-fire-2",
+          "name": "Smoke Detector 6 East",
+          "type": "FIRE",
+          "position": {
+            "x": 30,
+            "y": 68,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s6-fire-3",
+          "name": "Sprinkler 6 West",
+          "type": "FIRE",
+          "position": {
+            "x": -30,
+            "y": 68,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s6-fire-4",
+          "name": "Fire Alarm 6",
+          "type": "FIRE",
+          "position": {
+            "x": -38,
+            "y": 65,
+            "z": -90
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s6-water-1",
+          "name": "Water Riser 6",
+          "type": "WATER",
+          "position": {
+            "x": 38,
+            "y": 62,
+            "z": -90
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 20,
+          "status": "normal"
+        },
+        {
+          "id": "s6-elev-1",
+          "name": "Elevator 6",
+          "type": "ELEVATOR",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": -90
+          },
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s6-sec-1",
+          "name": "Hallway Access 6",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": -95
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s6-sec-2",
+          "name": "Stairwell 6",
+          "type": "SECURITY",
+          "position": {
+            "x": -38,
+            "y": 65,
+            "z": 90
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s6-light-1",
+          "name": "Hallway Lights 6",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 68,
+            "z": 0
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        },
+        {
+          "id": "s6-light-2",
+          "name": "Common Area 6",
+          "type": "LIGHTING",
+          "position": {
+            "x": 20,
+            "y": 68,
+            "z": -50
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "id": "f7",
+      "number": 7,
+      "name": "Residential Floor 7",
+      "type": "residential",
+      "height": 10,
+      "outline": [
+        [
+          -40,
+          -100
+        ],
+        [
+          40,
+          -100
+        ],
+        [
+          40,
+          100
+        ],
+        [
+          -40,
+          100
+        ]
+      ],
+      "sqft": 12000,
+      "sensors": [
+        {
+          "id": "s7-hvac-1",
+          "name": "HVAC Unit 7A",
+          "type": "HVAC",
+          "position": {
+            "x": -25,
+            "y": 75,
+            "z": -60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s7-hvac-2",
+          "name": "HVAC Unit 7B",
+          "type": "HVAC",
+          "position": {
+            "x": 25,
+            "y": 75,
+            "z": 0
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s7-hvac-3",
+          "name": "HVAC Unit 7C",
+          "type": "HVAC",
+          "position": {
+            "x": -10,
+            "y": 75,
+            "z": 60
+          },
+          "unit": "°F",
+          "min": 65,
+          "max": 78,
+          "status": "normal"
+        },
+        {
+          "id": "s7-elec-1",
+          "name": "Electrical Panel 7A",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": -38,
+            "y": 75,
+            "z": -80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s7-elec-2",
+          "name": "Electrical Panel 7B",
+          "type": "ELECTRICAL",
+          "position": {
+            "x": 38,
+            "y": 75,
+            "z": 80
+          },
+          "unit": "kW",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s7-fire-1",
+          "name": "Smoke Detector 7 Hall",
+          "type": "FIRE",
+          "position": {
+            "x": 0,
+            "y": 78,
+            "z": -70
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s7-fire-2",
+          "name": "Smoke Detector 7 East",
+          "type": "FIRE",
+          "position": {
+            "x": 30,
+            "y": 78,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s7-fire-3",
+          "name": "Sprinkler 7 West",
+          "type": "FIRE",
+          "position": {
+            "x": -30,
+            "y": 78,
+            "z": 30
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s7-fire-4",
+          "name": "Fire Alarm 7",
+          "type": "FIRE",
+          "position": {
+            "x": -38,
+            "y": 75,
+            "z": -90
+          },
+          "unit": "status",
+          "min": 0,
+          "max": 1,
+          "status": "normal"
+        },
+        {
+          "id": "s7-water-1",
+          "name": "Water Riser 7",
+          "type": "WATER",
+          "position": {
+            "x": 38,
+            "y": 72,
+            "z": -90
+          },
+          "unit": "GPM",
+          "min": 0,
+          "max": 20,
+          "status": "normal"
+        },
+        {
+          "id": "s7-elev-1",
+          "name": "Elevator 7",
+          "type": "ELEVATOR",
+          "position": {
+            "x": 0,
+            "y": 75,
+            "z": -90
+          },
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "status": "normal"
+        },
+        {
+          "id": "s7-sec-1",
+          "name": "Hallway Access 7",
+          "type": "SECURITY",
+          "position": {
+            "x": 0,
+            "y": 75,
+            "z": -95
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s7-sec-2",
+          "name": "Stairwell 7",
+          "type": "SECURITY",
+          "position": {
+            "x": -38,
+            "y": 75,
+            "z": 90
+          },
+          "unit": "events",
+          "min": 0,
+          "max": 50,
+          "status": "normal"
+        },
+        {
+          "id": "s7-light-1",
+          "name": "Hallway Lights 7",
+          "type": "LIGHTING",
+          "position": {
+            "x": 0,
+            "y": 78,
+            "z": 0
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        },
+        {
+          "id": "s7-light-2",
+          "name": "Common Area 7",
+          "type": "LIGHTING",
+          "position": {
+            "x": 20,
+            "y": 78,
+            "z": -50
+          },
+          "unit": "lux",
+          "min": 0,
+          "max": 500,
+          "status": "normal"
+        }
+      ]
+    }
+  ],
+  "systems": [
+    {
+      "type": "ELECTRICAL",
+      "nodes": [
+        {
+          "id": "elec-service",
+          "name": "Utility Service Entry",
+          "systemType": "ELECTRICAL",
+          "nodeType": "source",
+          "position": {
+            "x": -75,
+            "y": 3,
+            "z": -120
+          },
+          "floor": 1,
+          "description": "Seattle City Light 480/277V 3-phase service lateral, underground entry through west wall per NEC 230",
+          "specs": {
+            "voltage": "480/277V",
+            "phase": "3-phase",
+            "amperage": 2000,
+            "type": "Underground service"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-xfmr",
+          "name": "Step-Down Transformer",
+          "systemType": "ELECTRICAL",
+          "nodeType": "equipment",
+          "position": {
+            "x": -65,
+            "y": 5,
+            "z": -125
+          },
+          "floor": 1,
+          "description": "2000 kVA dry-type transformer, 480V to 208/120V for building distribution per NEC 450",
+          "specs": {
+            "kva": 2000,
+            "primaryV": "480V",
+            "secondaryV": "208/120V",
+            "cooling": "Dry-type (AA)"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-swgr",
+          "name": "Main Switchgear",
+          "systemType": "ELECTRICAL",
+          "nodeType": "equipment",
+          "position": {
+            "x": -60,
+            "y": 8,
+            "z": -118
+          },
+          "floor": 1,
+          "description": "Main distribution switchgear with utility metering, main breaker, and distribution section",
+          "specs": {
+            "amperage": 2000,
+            "voltage": "208/120V",
+            "busRating": "65 kAIC",
+            "sections": 4
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-ats",
+          "name": "Automatic Transfer Switch",
+          "systemType": "ELECTRICAL",
+          "nodeType": "equipment",
+          "position": {
+            "x": -55,
+            "y": 8,
+            "z": -118
+          },
+          "floor": 1,
+          "description": "Emergency/standby transfer switch for life safety and standby loads per NEC 700/701",
+          "specs": {
+            "amperage": 400,
+            "type": "Automatic",
+            "transferTime": "10 sec"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-comm-dp",
+          "name": "Commercial Distribution Panel",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -50,
+            "y": 15,
+            "z": -130
+          },
+          "floor": 1,
+          "description": "Safeway main distribution panel — feeds refrigeration, bakery, deli, and lighting sub-panels",
+          "specs": {
+            "amperage": 400,
+            "voltage": "208/120V",
+            "circuits": 42,
+            "mounting": "Surface"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-refrig",
+          "name": "Refrigeration Panel",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 55,
+            "y": 15,
+            "z": -50
+          },
+          "floor": 1,
+          "description": "Dedicated panel for walk-in coolers, freezers, and display cases per NEC 430",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208V",
+            "circuits": 30,
+            "load": "~150 kW"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-bakery",
+          "name": "Bakery / Deli Panel",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 50,
+            "y": 15,
+            "z": 90
+          },
+          "floor": 1,
+          "description": "Feeds ovens, proof boxes, fryers, and warming equipment",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "load": "~60 kW"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-light-gf",
+          "name": "GF Lighting Panel",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 0,
+            "y": 15,
+            "z": 130
+          },
+          "floor": 1,
+          "description": "Ground floor lighting and signage panel with daylight harvesting controls",
+          "specs": {
+            "amperage": 100,
+            "voltage": "120V",
+            "circuits": 24,
+            "load": "~30 kW"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-base",
+          "name": "Bus Duct Riser Base",
+          "systemType": "ELECTRICAL",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 18,
+            "z": -85
+          },
+          "floor": 1,
+          "description": "Base of electrical riser — bus duct from switchgear feeds all residential floors",
+          "specs": {
+            "type": "Bus duct",
+            "amperage": 800,
+            "voltage": "208/120V"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-f2",
+          "name": "Electrical Riser F2",
+          "systemType": "ELECTRICAL",
+          "nodeType": "riser",
+          "position": {
+            "x": 35,
+            "y": 28,
+            "z": -85
+          },
+          "floor": 2,
+          "description": "Bus duct riser tap at floor 2 — feeds floor distribution panels",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208/120V",
+            "tap": "Floor 2"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f2-a",
+          "name": "Panel 2A (West)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -35,
+            "y": 25,
+            "z": -60
+          },
+          "floor": 2,
+          "description": "Residential distribution panel — west wing units, floor 2",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f2-b",
+          "name": "Panel 2B (East)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 35,
+            "y": 25,
+            "z": 60
+          },
+          "floor": 2,
+          "description": "Residential distribution panel — east wing units, floor 2",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-f3",
+          "name": "Electrical Riser F3",
+          "systemType": "ELECTRICAL",
+          "nodeType": "riser",
+          "position": {
+            "x": 35,
+            "y": 38,
+            "z": -85
+          },
+          "floor": 3,
+          "description": "Bus duct riser tap at floor 3 — feeds floor distribution panels",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208/120V",
+            "tap": "Floor 3"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f3-a",
+          "name": "Panel 3A (West)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -35,
+            "y": 35,
+            "z": -60
+          },
+          "floor": 3,
+          "description": "Residential distribution panel — west wing units, floor 3",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f3-b",
+          "name": "Panel 3B (East)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 35,
+            "y": 35,
+            "z": 60
+          },
+          "floor": 3,
+          "description": "Residential distribution panel — east wing units, floor 3",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-f4",
+          "name": "Electrical Riser F4",
+          "systemType": "ELECTRICAL",
+          "nodeType": "riser",
+          "position": {
+            "x": 35,
+            "y": 48,
+            "z": -85
+          },
+          "floor": 4,
+          "description": "Bus duct riser tap at floor 4 — feeds floor distribution panels",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208/120V",
+            "tap": "Floor 4"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f4-a",
+          "name": "Panel 4A (West)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -35,
+            "y": 45,
+            "z": -60
+          },
+          "floor": 4,
+          "description": "Residential distribution panel — west wing units, floor 4",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f4-b",
+          "name": "Panel 4B (East)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 35,
+            "y": 45,
+            "z": 60
+          },
+          "floor": 4,
+          "description": "Residential distribution panel — east wing units, floor 4",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-f5",
+          "name": "Electrical Riser F5",
+          "systemType": "ELECTRICAL",
+          "nodeType": "riser",
+          "position": {
+            "x": 35,
+            "y": 58,
+            "z": -85
+          },
+          "floor": 5,
+          "description": "Bus duct riser tap at floor 5 — feeds floor distribution panels",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208/120V",
+            "tap": "Floor 5"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f5-a",
+          "name": "Panel 5A (West)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -35,
+            "y": 55,
+            "z": -60
+          },
+          "floor": 5,
+          "description": "Residential distribution panel — west wing units, floor 5",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f5-b",
+          "name": "Panel 5B (East)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 35,
+            "y": 55,
+            "z": 60
+          },
+          "floor": 5,
+          "description": "Residential distribution panel — east wing units, floor 5",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-f6",
+          "name": "Electrical Riser F6",
+          "systemType": "ELECTRICAL",
+          "nodeType": "riser",
+          "position": {
+            "x": 35,
+            "y": 68,
+            "z": -85
+          },
+          "floor": 6,
+          "description": "Bus duct riser tap at floor 6 — feeds floor distribution panels",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208/120V",
+            "tap": "Floor 6"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f6-a",
+          "name": "Panel 6A (West)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -35,
+            "y": 65,
+            "z": -60
+          },
+          "floor": 6,
+          "description": "Residential distribution panel — west wing units, floor 6",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f6-b",
+          "name": "Panel 6B (East)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 35,
+            "y": 65,
+            "z": 60
+          },
+          "floor": 6,
+          "description": "Residential distribution panel — east wing units, floor 6",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-riser-f7",
+          "name": "Electrical Riser F7",
+          "systemType": "ELECTRICAL",
+          "nodeType": "riser",
+          "position": {
+            "x": 35,
+            "y": 78,
+            "z": -85
+          },
+          "floor": 7,
+          "description": "Bus duct riser tap at floor 7 — feeds floor distribution panels",
+          "specs": {
+            "amperage": 200,
+            "voltage": "208/120V",
+            "tap": "Floor 7"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f7-a",
+          "name": "Panel 7A (West)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": -35,
+            "y": 75,
+            "z": -60
+          },
+          "floor": 7,
+          "description": "Residential distribution panel — west wing units, floor 7",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "elec-panel-f7-b",
+          "name": "Panel 7B (East)",
+          "systemType": "ELECTRICAL",
+          "nodeType": "panel",
+          "position": {
+            "x": 35,
+            "y": 75,
+            "z": 60
+          },
+          "floor": 7,
+          "description": "Residential distribution panel — east wing units, floor 7",
+          "specs": {
+            "amperage": 100,
+            "voltage": "208/120V",
+            "circuits": 20,
+            "units": "4 condos"
+          },
+          "status": "normal"
+        }
+      ],
+      "pipes": [
+        {
+          "id": "elec-p-svc-xfmr",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-service",
+          "toNode": "elec-xfmr",
+          "waypoints": [
+            [
+              -75,
+              3,
+              -120
+            ],
+            [
+              -65,
+              3,
+              -120
+            ],
+            [
+              -65,
+              5,
+              -125
+            ]
+          ],
+          "diameter": 1,
+          "label": "4\" conduit (480V)"
+        },
+        {
+          "id": "elec-p-xfmr-swgr",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-xfmr",
+          "toNode": "elec-swgr",
+          "waypoints": [
+            [
+              -65,
+              5,
+              -125
+            ],
+            [
+              -60,
+              5,
+              -125
+            ],
+            [
+              -60,
+              8,
+              -118
+            ]
+          ],
+          "diameter": 1,
+          "label": "Bus duct"
+        },
+        {
+          "id": "elec-p-swgr-ats",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-swgr",
+          "toNode": "elec-ats",
+          "waypoints": [
+            [
+              -60,
+              8,
+              -118
+            ],
+            [
+              -55,
+              8,
+              -118
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "2\" conduit"
+        },
+        {
+          "id": "elec-p-swgr-comm",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-swgr",
+          "toNode": "elec-comm-dp",
+          "waypoints": [
+            [
+              -60,
+              8,
+              -118
+            ],
+            [
+              -60,
+              15,
+              -118
+            ],
+            [
+              -60,
+              15,
+              -130
+            ],
+            [
+              -50,
+              15,
+              -130
+            ]
+          ],
+          "diameter": 0.9,
+          "label": "3\" conduit"
+        },
+        {
+          "id": "elec-p-comm-refrig",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-comm-dp",
+          "toNode": "elec-refrig",
+          "waypoints": [
+            [
+              -50,
+              15,
+              -130
+            ],
+            [
+              -50,
+              18,
+              -130
+            ],
+            [
+              -50,
+              18,
+              -50
+            ],
+            [
+              55,
+              18,
+              -50
+            ],
+            [
+              55,
+              15,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "2.5\" conduit"
+        },
+        {
+          "id": "elec-p-comm-bakery",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-comm-dp",
+          "toNode": "elec-bakery",
+          "waypoints": [
+            [
+              -50,
+              15,
+              -130
+            ],
+            [
+              -50,
+              18,
+              -130
+            ],
+            [
+              -50,
+              18,
+              90
+            ],
+            [
+              50,
+              18,
+              90
+            ],
+            [
+              50,
+              15,
+              90
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "2\" conduit"
+        },
+        {
+          "id": "elec-p-comm-light",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-comm-dp",
+          "toNode": "elec-light-gf",
+          "waypoints": [
+            [
+              -50,
+              15,
+              -130
+            ],
+            [
+              -50,
+              18,
+              -130
+            ],
+            [
+              -50,
+              18,
+              130
+            ],
+            [
+              0,
+              18,
+              130
+            ],
+            [
+              0,
+              15,
+              130
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-swgr-riser",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-swgr",
+          "toNode": "elec-riser-base",
+          "waypoints": [
+            [
+              -60,
+              8,
+              -118
+            ],
+            [
+              -60,
+              18,
+              -118
+            ],
+            [
+              -60,
+              18,
+              -85
+            ],
+            [
+              35,
+              18,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-riser-1-2",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-base",
+          "toNode": "elec-riser-f2",
+          "waypoints": [
+            [
+              35,
+              18,
+              -85
+            ],
+            [
+              35,
+              28,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-f2-a",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f2",
+          "toNode": "elec-panel-f2-a",
+          "waypoints": [
+            [
+              35,
+              28,
+              -85
+            ],
+            [
+              -35,
+              28,
+              -85
+            ],
+            [
+              -35,
+              28,
+              -60
+            ],
+            [
+              -35,
+              25,
+              -60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-f2-b",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f2",
+          "toNode": "elec-panel-f2-b",
+          "waypoints": [
+            [
+              35,
+              28,
+              -85
+            ],
+            [
+              35,
+              28,
+              60
+            ],
+            [
+              35,
+              25,
+              60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-riser-2-3",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f2",
+          "toNode": "elec-riser-f3",
+          "waypoints": [
+            [
+              35,
+              28,
+              -85
+            ],
+            [
+              35,
+              38,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-f3-a",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f3",
+          "toNode": "elec-panel-f3-a",
+          "waypoints": [
+            [
+              35,
+              38,
+              -85
+            ],
+            [
+              -35,
+              38,
+              -85
+            ],
+            [
+              -35,
+              38,
+              -60
+            ],
+            [
+              -35,
+              35,
+              -60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-f3-b",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f3",
+          "toNode": "elec-panel-f3-b",
+          "waypoints": [
+            [
+              35,
+              38,
+              -85
+            ],
+            [
+              35,
+              38,
+              60
+            ],
+            [
+              35,
+              35,
+              60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-riser-3-4",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f3",
+          "toNode": "elec-riser-f4",
+          "waypoints": [
+            [
+              35,
+              38,
+              -85
+            ],
+            [
+              35,
+              48,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-f4-a",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f4",
+          "toNode": "elec-panel-f4-a",
+          "waypoints": [
+            [
+              35,
+              48,
+              -85
+            ],
+            [
+              -35,
+              48,
+              -85
+            ],
+            [
+              -35,
+              48,
+              -60
+            ],
+            [
+              -35,
+              45,
+              -60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-f4-b",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f4",
+          "toNode": "elec-panel-f4-b",
+          "waypoints": [
+            [
+              35,
+              48,
+              -85
+            ],
+            [
+              35,
+              48,
+              60
+            ],
+            [
+              35,
+              45,
+              60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-riser-4-5",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f4",
+          "toNode": "elec-riser-f5",
+          "waypoints": [
+            [
+              35,
+              48,
+              -85
+            ],
+            [
+              35,
+              58,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-f5-a",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f5",
+          "toNode": "elec-panel-f5-a",
+          "waypoints": [
+            [
+              35,
+              58,
+              -85
+            ],
+            [
+              -35,
+              58,
+              -85
+            ],
+            [
+              -35,
+              58,
+              -60
+            ],
+            [
+              -35,
+              55,
+              -60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-f5-b",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f5",
+          "toNode": "elec-panel-f5-b",
+          "waypoints": [
+            [
+              35,
+              58,
+              -85
+            ],
+            [
+              35,
+              58,
+              60
+            ],
+            [
+              35,
+              55,
+              60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-riser-5-6",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f5",
+          "toNode": "elec-riser-f6",
+          "waypoints": [
+            [
+              35,
+              58,
+              -85
+            ],
+            [
+              35,
+              68,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-f6-a",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f6",
+          "toNode": "elec-panel-f6-a",
+          "waypoints": [
+            [
+              35,
+              68,
+              -85
+            ],
+            [
+              -35,
+              68,
+              -85
+            ],
+            [
+              -35,
+              68,
+              -60
+            ],
+            [
+              -35,
+              65,
+              -60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-f6-b",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f6",
+          "toNode": "elec-panel-f6-b",
+          "waypoints": [
+            [
+              35,
+              68,
+              -85
+            ],
+            [
+              35,
+              68,
+              60
+            ],
+            [
+              35,
+              65,
+              60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-riser-6-7",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f6",
+          "toNode": "elec-riser-f7",
+          "waypoints": [
+            [
+              35,
+              68,
+              -85
+            ],
+            [
+              35,
+              78,
+              -85
+            ]
+          ],
+          "diameter": 1,
+          "label": "800A bus duct"
+        },
+        {
+          "id": "elec-p-f7-a",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f7",
+          "toNode": "elec-panel-f7-a",
+          "waypoints": [
+            [
+              35,
+              78,
+              -85
+            ],
+            [
+              -35,
+              78,
+              -85
+            ],
+            [
+              -35,
+              78,
+              -60
+            ],
+            [
+              -35,
+              75,
+              -60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        },
+        {
+          "id": "elec-p-f7-b",
+          "systemType": "ELECTRICAL",
+          "fromNode": "elec-riser-f7",
+          "toNode": "elec-panel-f7-b",
+          "waypoints": [
+            [
+              35,
+              78,
+              -85
+            ],
+            [
+              35,
+              78,
+              60
+            ],
+            [
+              35,
+              75,
+              60
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "1.5\" conduit"
+        }
+      ]
+    },
+    {
+      "type": "HVAC",
+      "nodes": [
+        {
+          "id": "hvac-ahu-1",
+          "name": "AHU-1 (Primary Supply)",
+          "systemType": "HVAC",
+          "nodeType": "equipment",
+          "position": {
+            "x": -5,
+            "y": 84,
+            "z": -5
+          },
+          "floor": 8,
+          "description": "Variable-air-volume AHU with enthalpy wheel energy recovery, MERV-13 filtration per ASHRAE 62.1",
+          "specs": {
+            "cfm": 15000,
+            "cooling": "40 tons",
+            "heating": "600 MBH",
+            "erv": "Enthalpy wheel 75%"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-ahu-2",
+          "name": "AHU-2 (Return / Exhaust)",
+          "systemType": "HVAC",
+          "nodeType": "equipment",
+          "position": {
+            "x": 5,
+            "y": 84,
+            "z": 5
+          },
+          "floor": 8,
+          "description": "Return air handler with exhaust relief dampers and heat recovery",
+          "specs": {
+            "cfm": 14000,
+            "filters": "MERV-13",
+            "exhaust": "3000 CFM min"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-top",
+          "name": "Supply Duct Riser Top",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 82,
+            "z": 0
+          },
+          "floor": 8,
+          "description": "Main supply duct connection from AHU-1 to vertical riser",
+          "specs": {
+            "ductSize": "36×24\"",
+            "cfm": 15000
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-top",
+          "name": "Return Duct Riser Top",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 82,
+            "z": 0
+          },
+          "floor": 8,
+          "description": "Main return duct connection to AHU-2 from vertical riser",
+          "specs": {
+            "ductSize": "36×24\"",
+            "cfm": 14000
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-rtu",
+          "name": "Commercial RTU",
+          "systemType": "HVAC",
+          "nodeType": "equipment",
+          "position": {
+            "x": -30,
+            "y": 21,
+            "z": 0
+          },
+          "floor": 1,
+          "description": "Packaged rooftop unit for Safeway — dedicated system per IMC requirements for commercial spaces",
+          "specs": {
+            "cfm": 25000,
+            "cooling": "75 tons",
+            "heating": "1200 MBH",
+            "economizer": "Integrated"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-comm-supply-a",
+          "name": "Safeway Supply A (Produce)",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -50,
+            "y": 18,
+            "z": -100
+          },
+          "floor": 1,
+          "description": "Supply air diffuser serving produce section — maintains 68-72°F year-round",
+          "specs": {
+            "cfm": 6000,
+            "ductSize": "24×18\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-comm-supply-b",
+          "name": "Safeway Supply B (Aisles)",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 18,
+            "z": 50
+          },
+          "floor": 1,
+          "description": "Supply air diffuser serving main aisle sections",
+          "specs": {
+            "cfm": 8000,
+            "ductSize": "24×18\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-comm-supply-c",
+          "name": "Safeway Supply C (Bakery)",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 50,
+            "y": 18,
+            "z": 80
+          },
+          "floor": 1,
+          "description": "Supply air diffuser serving bakery/deli — higher exhaust makeup for cooking hoods",
+          "specs": {
+            "cfm": 7000,
+            "ductSize": "24×18\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-comm-return",
+          "name": "Safeway Return Plenum",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 18,
+            "z": 0
+          },
+          "floor": 1,
+          "description": "Central return air plenum — ceiling plenum return per IMC 602",
+          "specs": {
+            "cfm": 22000,
+            "type": "Plenum return"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f2",
+          "name": "Supply Junction F2",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 28,
+            "z": 0
+          },
+          "floor": 2,
+          "description": "Supply duct tee at floor 2 — VAV box with reheat",
+          "specs": {
+            "cfm": 2500,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-f2",
+          "name": "Return Junction F2",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 28,
+            "z": 0
+          },
+          "floor": 2,
+          "description": "Return air junction at floor 2",
+          "specs": {
+            "cfm": 2300,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f2-a",
+          "name": "Supply F2 West",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 25,
+            "z": -50
+          },
+          "floor": 2,
+          "description": "VAV terminal unit serving west wing units, floor 2",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f2-b",
+          "name": "Supply F2 Center",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 25,
+            "z": 30
+          },
+          "floor": 2,
+          "description": "VAV terminal unit serving center units, floor 2",
+          "specs": {
+            "cfm": 900,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f2-c",
+          "name": "Supply F2 East",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 25,
+            "y": 25,
+            "z": 70
+          },
+          "floor": 2,
+          "description": "VAV terminal unit serving east wing units, floor 2",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f3",
+          "name": "Supply Junction F3",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 38,
+            "z": 0
+          },
+          "floor": 3,
+          "description": "Supply duct tee at floor 3 — VAV box with reheat",
+          "specs": {
+            "cfm": 2500,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-f3",
+          "name": "Return Junction F3",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 38,
+            "z": 0
+          },
+          "floor": 3,
+          "description": "Return air junction at floor 3",
+          "specs": {
+            "cfm": 2300,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f3-a",
+          "name": "Supply F3 West",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 35,
+            "z": -50
+          },
+          "floor": 3,
+          "description": "VAV terminal unit serving west wing units, floor 3",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f3-b",
+          "name": "Supply F3 Center",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 35,
+            "z": 30
+          },
+          "floor": 3,
+          "description": "VAV terminal unit serving center units, floor 3",
+          "specs": {
+            "cfm": 900,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f3-c",
+          "name": "Supply F3 East",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 25,
+            "y": 35,
+            "z": 70
+          },
+          "floor": 3,
+          "description": "VAV terminal unit serving east wing units, floor 3",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f4",
+          "name": "Supply Junction F4",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 48,
+            "z": 0
+          },
+          "floor": 4,
+          "description": "Supply duct tee at floor 4 — VAV box with reheat",
+          "specs": {
+            "cfm": 2500,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-f4",
+          "name": "Return Junction F4",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 48,
+            "z": 0
+          },
+          "floor": 4,
+          "description": "Return air junction at floor 4",
+          "specs": {
+            "cfm": 2300,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f4-a",
+          "name": "Supply F4 West",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 45,
+            "z": -50
+          },
+          "floor": 4,
+          "description": "VAV terminal unit serving west wing units, floor 4",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f4-b",
+          "name": "Supply F4 Center",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 45,
+            "z": 30
+          },
+          "floor": 4,
+          "description": "VAV terminal unit serving center units, floor 4",
+          "specs": {
+            "cfm": 900,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f4-c",
+          "name": "Supply F4 East",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 25,
+            "y": 45,
+            "z": 70
+          },
+          "floor": 4,
+          "description": "VAV terminal unit serving east wing units, floor 4",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f5",
+          "name": "Supply Junction F5",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 58,
+            "z": 0
+          },
+          "floor": 5,
+          "description": "Supply duct tee at floor 5 — VAV box with reheat",
+          "specs": {
+            "cfm": 2500,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-f5",
+          "name": "Return Junction F5",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 58,
+            "z": 0
+          },
+          "floor": 5,
+          "description": "Return air junction at floor 5",
+          "specs": {
+            "cfm": 2300,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f5-a",
+          "name": "Supply F5 West",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 55,
+            "z": -50
+          },
+          "floor": 5,
+          "description": "VAV terminal unit serving west wing units, floor 5",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f5-b",
+          "name": "Supply F5 Center",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 55,
+            "z": 30
+          },
+          "floor": 5,
+          "description": "VAV terminal unit serving center units, floor 5",
+          "specs": {
+            "cfm": 900,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f5-c",
+          "name": "Supply F5 East",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 25,
+            "y": 55,
+            "z": 70
+          },
+          "floor": 5,
+          "description": "VAV terminal unit serving east wing units, floor 5",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f6",
+          "name": "Supply Junction F6",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 68,
+            "z": 0
+          },
+          "floor": 6,
+          "description": "Supply duct tee at floor 6 — VAV box with reheat",
+          "specs": {
+            "cfm": 2500,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-f6",
+          "name": "Return Junction F6",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 68,
+            "z": 0
+          },
+          "floor": 6,
+          "description": "Return air junction at floor 6",
+          "specs": {
+            "cfm": 2300,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f6-a",
+          "name": "Supply F6 West",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 65,
+            "z": -50
+          },
+          "floor": 6,
+          "description": "VAV terminal unit serving west wing units, floor 6",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f6-b",
+          "name": "Supply F6 Center",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": 30
+          },
+          "floor": 6,
+          "description": "VAV terminal unit serving center units, floor 6",
+          "specs": {
+            "cfm": 900,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f6-c",
+          "name": "Supply F6 East",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 25,
+            "y": 65,
+            "z": 70
+          },
+          "floor": 6,
+          "description": "VAV terminal unit serving east wing units, floor 6",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f7",
+          "name": "Supply Junction F7",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": -12,
+            "y": 78,
+            "z": 0
+          },
+          "floor": 7,
+          "description": "Supply duct tee at floor 7 — VAV box with reheat",
+          "specs": {
+            "cfm": 2500,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-return-f7",
+          "name": "Return Junction F7",
+          "systemType": "HVAC",
+          "nodeType": "junction",
+          "position": {
+            "x": 12,
+            "y": 78,
+            "z": 0
+          },
+          "floor": 7,
+          "description": "Return air junction at floor 7",
+          "specs": {
+            "cfm": 2300,
+            "ductSize": "18×12\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f7-a",
+          "name": "Supply F7 West",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 75,
+            "z": -50
+          },
+          "floor": 7,
+          "description": "VAV terminal unit serving west wing units, floor 7",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f7-b",
+          "name": "Supply F7 Center",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 75,
+            "z": 30
+          },
+          "floor": 7,
+          "description": "VAV terminal unit serving center units, floor 7",
+          "specs": {
+            "cfm": 900,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "hvac-supply-f7-c",
+          "name": "Supply F7 East",
+          "systemType": "HVAC",
+          "nodeType": "terminal",
+          "position": {
+            "x": 25,
+            "y": 75,
+            "z": 70
+          },
+          "floor": 7,
+          "description": "VAV terminal unit serving east wing units, floor 7",
+          "specs": {
+            "cfm": 800,
+            "type": "VAV w/ reheat"
+          },
+          "status": "normal"
+        }
+      ],
+      "pipes": [
+        {
+          "id": "hvac-p-ahu1-supply",
+          "systemType": "HVAC",
+          "fromNode": "hvac-ahu-1",
+          "toNode": "hvac-supply-top",
+          "waypoints": [
+            [
+              -5,
+              84,
+              -5
+            ],
+            [
+              -12,
+              84,
+              -5
+            ],
+            [
+              -12,
+              82,
+              0
+            ]
+          ],
+          "diameter": 1.8,
+          "label": "36×24\" supply duct"
+        },
+        {
+          "id": "hvac-p-ahu2-return",
+          "systemType": "HVAC",
+          "fromNode": "hvac-ahu-2",
+          "toNode": "hvac-return-top",
+          "waypoints": [
+            [
+              5,
+              84,
+              5
+            ],
+            [
+              12,
+              84,
+              5
+            ],
+            [
+              12,
+              82,
+              0
+            ]
+          ],
+          "diameter": 1.8,
+          "label": "36×24\" return duct"
+        },
+        {
+          "id": "hvac-p-rtu-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-rtu",
+          "toNode": "hvac-comm-supply-a",
+          "waypoints": [
+            [
+              -30,
+              21,
+              0
+            ],
+            [
+              -30,
+              18,
+              0
+            ],
+            [
+              -30,
+              18,
+              -100
+            ],
+            [
+              -50,
+              18,
+              -100
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" duct"
+        },
+        {
+          "id": "hvac-p-rtu-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-rtu",
+          "toNode": "hvac-comm-supply-b",
+          "waypoints": [
+            [
+              -30,
+              21,
+              0
+            ],
+            [
+              -30,
+              18,
+              0
+            ],
+            [
+              -30,
+              18,
+              50
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" duct"
+        },
+        {
+          "id": "hvac-p-rtu-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-rtu",
+          "toNode": "hvac-comm-supply-c",
+          "waypoints": [
+            [
+              -30,
+              21,
+              0
+            ],
+            [
+              -30,
+              18,
+              0
+            ],
+            [
+              -30,
+              18,
+              80
+            ],
+            [
+              50,
+              18,
+              80
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" duct"
+        },
+        {
+          "id": "hvac-p-rtu-return",
+          "systemType": "HVAC",
+          "fromNode": "hvac-comm-return",
+          "toNode": "hvac-rtu",
+          "waypoints": [
+            [
+              0,
+              18,
+              0
+            ],
+            [
+              -30,
+              18,
+              0
+            ],
+            [
+              -30,
+              21,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "Return plenum"
+        },
+        {
+          "id": "hvac-p-supply-riser-2",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-top",
+          "toNode": "hvac-supply-f2",
+          "waypoints": [
+            [
+              -12,
+              82,
+              0
+            ],
+            [
+              -12,
+              28,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" supply riser"
+        },
+        {
+          "id": "hvac-p-return-riser-2",
+          "systemType": "HVAC",
+          "fromNode": "hvac-return-f2",
+          "toNode": "hvac-return-top",
+          "waypoints": [
+            [
+              12,
+              28,
+              0
+            ],
+            [
+              12,
+              82,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" return riser"
+        },
+        {
+          "id": "hvac-p-f2-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f2",
+          "toNode": "hvac-supply-f2-a",
+          "waypoints": [
+            [
+              -12,
+              28,
+              0
+            ],
+            [
+              -30,
+              28,
+              0
+            ],
+            [
+              -30,
+              28,
+              -50
+            ],
+            [
+              -30,
+              25,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f2-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f2",
+          "toNode": "hvac-supply-f2-b",
+          "waypoints": [
+            [
+              -12,
+              28,
+              0
+            ],
+            [
+              0,
+              28,
+              0
+            ],
+            [
+              0,
+              28,
+              30
+            ],
+            [
+              0,
+              25,
+              30
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f2-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f2",
+          "toNode": "hvac-supply-f2-c",
+          "waypoints": [
+            [
+              -12,
+              28,
+              0
+            ],
+            [
+              25,
+              28,
+              0
+            ],
+            [
+              25,
+              28,
+              70
+            ],
+            [
+              25,
+              25,
+              70
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-supply-riser-3",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f2",
+          "toNode": "hvac-supply-f3",
+          "waypoints": [
+            [
+              -12,
+              28,
+              0
+            ],
+            [
+              -12,
+              38,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" supply riser"
+        },
+        {
+          "id": "hvac-p-return-riser-3",
+          "systemType": "HVAC",
+          "fromNode": "hvac-return-f3",
+          "toNode": "hvac-return-f2",
+          "waypoints": [
+            [
+              12,
+              38,
+              0
+            ],
+            [
+              12,
+              28,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" return riser"
+        },
+        {
+          "id": "hvac-p-f3-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f3",
+          "toNode": "hvac-supply-f3-a",
+          "waypoints": [
+            [
+              -12,
+              38,
+              0
+            ],
+            [
+              -30,
+              38,
+              0
+            ],
+            [
+              -30,
+              38,
+              -50
+            ],
+            [
+              -30,
+              35,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f3-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f3",
+          "toNode": "hvac-supply-f3-b",
+          "waypoints": [
+            [
+              -12,
+              38,
+              0
+            ],
+            [
+              0,
+              38,
+              0
+            ],
+            [
+              0,
+              38,
+              30
+            ],
+            [
+              0,
+              35,
+              30
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f3-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f3",
+          "toNode": "hvac-supply-f3-c",
+          "waypoints": [
+            [
+              -12,
+              38,
+              0
+            ],
+            [
+              25,
+              38,
+              0
+            ],
+            [
+              25,
+              38,
+              70
+            ],
+            [
+              25,
+              35,
+              70
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-supply-riser-4",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f3",
+          "toNode": "hvac-supply-f4",
+          "waypoints": [
+            [
+              -12,
+              38,
+              0
+            ],
+            [
+              -12,
+              48,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" supply riser"
+        },
+        {
+          "id": "hvac-p-return-riser-4",
+          "systemType": "HVAC",
+          "fromNode": "hvac-return-f4",
+          "toNode": "hvac-return-f3",
+          "waypoints": [
+            [
+              12,
+              48,
+              0
+            ],
+            [
+              12,
+              38,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" return riser"
+        },
+        {
+          "id": "hvac-p-f4-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f4",
+          "toNode": "hvac-supply-f4-a",
+          "waypoints": [
+            [
+              -12,
+              48,
+              0
+            ],
+            [
+              -30,
+              48,
+              0
+            ],
+            [
+              -30,
+              48,
+              -50
+            ],
+            [
+              -30,
+              45,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f4-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f4",
+          "toNode": "hvac-supply-f4-b",
+          "waypoints": [
+            [
+              -12,
+              48,
+              0
+            ],
+            [
+              0,
+              48,
+              0
+            ],
+            [
+              0,
+              48,
+              30
+            ],
+            [
+              0,
+              45,
+              30
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f4-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f4",
+          "toNode": "hvac-supply-f4-c",
+          "waypoints": [
+            [
+              -12,
+              48,
+              0
+            ],
+            [
+              25,
+              48,
+              0
+            ],
+            [
+              25,
+              48,
+              70
+            ],
+            [
+              25,
+              45,
+              70
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-supply-riser-5",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f4",
+          "toNode": "hvac-supply-f5",
+          "waypoints": [
+            [
+              -12,
+              48,
+              0
+            ],
+            [
+              -12,
+              58,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" supply riser"
+        },
+        {
+          "id": "hvac-p-return-riser-5",
+          "systemType": "HVAC",
+          "fromNode": "hvac-return-f5",
+          "toNode": "hvac-return-f4",
+          "waypoints": [
+            [
+              12,
+              58,
+              0
+            ],
+            [
+              12,
+              48,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" return riser"
+        },
+        {
+          "id": "hvac-p-f5-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f5",
+          "toNode": "hvac-supply-f5-a",
+          "waypoints": [
+            [
+              -12,
+              58,
+              0
+            ],
+            [
+              -30,
+              58,
+              0
+            ],
+            [
+              -30,
+              58,
+              -50
+            ],
+            [
+              -30,
+              55,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f5-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f5",
+          "toNode": "hvac-supply-f5-b",
+          "waypoints": [
+            [
+              -12,
+              58,
+              0
+            ],
+            [
+              0,
+              58,
+              0
+            ],
+            [
+              0,
+              58,
+              30
+            ],
+            [
+              0,
+              55,
+              30
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f5-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f5",
+          "toNode": "hvac-supply-f5-c",
+          "waypoints": [
+            [
+              -12,
+              58,
+              0
+            ],
+            [
+              25,
+              58,
+              0
+            ],
+            [
+              25,
+              58,
+              70
+            ],
+            [
+              25,
+              55,
+              70
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-supply-riser-6",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f5",
+          "toNode": "hvac-supply-f6",
+          "waypoints": [
+            [
+              -12,
+              58,
+              0
+            ],
+            [
+              -12,
+              68,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" supply riser"
+        },
+        {
+          "id": "hvac-p-return-riser-6",
+          "systemType": "HVAC",
+          "fromNode": "hvac-return-f6",
+          "toNode": "hvac-return-f5",
+          "waypoints": [
+            [
+              12,
+              68,
+              0
+            ],
+            [
+              12,
+              58,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" return riser"
+        },
+        {
+          "id": "hvac-p-f6-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f6",
+          "toNode": "hvac-supply-f6-a",
+          "waypoints": [
+            [
+              -12,
+              68,
+              0
+            ],
+            [
+              -30,
+              68,
+              0
+            ],
+            [
+              -30,
+              68,
+              -50
+            ],
+            [
+              -30,
+              65,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f6-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f6",
+          "toNode": "hvac-supply-f6-b",
+          "waypoints": [
+            [
+              -12,
+              68,
+              0
+            ],
+            [
+              0,
+              68,
+              0
+            ],
+            [
+              0,
+              68,
+              30
+            ],
+            [
+              0,
+              65,
+              30
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f6-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f6",
+          "toNode": "hvac-supply-f6-c",
+          "waypoints": [
+            [
+              -12,
+              68,
+              0
+            ],
+            [
+              25,
+              68,
+              0
+            ],
+            [
+              25,
+              68,
+              70
+            ],
+            [
+              25,
+              65,
+              70
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-supply-riser-7",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f6",
+          "toNode": "hvac-supply-f7",
+          "waypoints": [
+            [
+              -12,
+              68,
+              0
+            ],
+            [
+              -12,
+              78,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" supply riser"
+        },
+        {
+          "id": "hvac-p-return-riser-7",
+          "systemType": "HVAC",
+          "fromNode": "hvac-return-f7",
+          "toNode": "hvac-return-f6",
+          "waypoints": [
+            [
+              12,
+              78,
+              0
+            ],
+            [
+              12,
+              68,
+              0
+            ]
+          ],
+          "diameter": 1.5,
+          "label": "24×18\" return riser"
+        },
+        {
+          "id": "hvac-p-f7-a",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f7",
+          "toNode": "hvac-supply-f7-a",
+          "waypoints": [
+            [
+              -12,
+              78,
+              0
+            ],
+            [
+              -30,
+              78,
+              0
+            ],
+            [
+              -30,
+              78,
+              -50
+            ],
+            [
+              -30,
+              75,
+              -50
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f7-b",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f7",
+          "toNode": "hvac-supply-f7-b",
+          "waypoints": [
+            [
+              -12,
+              78,
+              0
+            ],
+            [
+              0,
+              78,
+              0
+            ],
+            [
+              0,
+              78,
+              30
+            ],
+            [
+              0,
+              75,
+              30
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        },
+        {
+          "id": "hvac-p-f7-c",
+          "systemType": "HVAC",
+          "fromNode": "hvac-supply-f7",
+          "toNode": "hvac-supply-f7-c",
+          "waypoints": [
+            [
+              -12,
+              78,
+              0
+            ],
+            [
+              25,
+              78,
+              0
+            ],
+            [
+              25,
+              78,
+              70
+            ],
+            [
+              25,
+              75,
+              70
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "12×8\" branch"
+        }
+      ]
+    },
+    {
+      "type": "WATER",
+      "nodes": [
+        {
+          "id": "water-main",
+          "name": "Water Main Entry",
+          "systemType": "WATER",
+          "nodeType": "source",
+          "position": {
+            "x": -75,
+            "y": 3,
+            "z": 0
+          },
+          "floor": 1,
+          "description": "4\" ductile iron water service from city main on Pacific Ave, per IPC 603",
+          "specs": {
+            "pipeSize": "4\"",
+            "material": "Ductile iron",
+            "pressure": "65 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-meter",
+          "name": "Water Meter",
+          "systemType": "WATER",
+          "nodeType": "meter",
+          "position": {
+            "x": -68,
+            "y": 3,
+            "z": 0
+          },
+          "floor": 1,
+          "description": "Compound water meter with remote reading — required by Seattle Public Utilities",
+          "specs": {
+            "size": "4\"",
+            "type": "Compound",
+            "reading": "AMR"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-bfp",
+          "name": "Backflow Preventer",
+          "systemType": "WATER",
+          "nodeType": "valve",
+          "position": {
+            "x": -62,
+            "y": 3,
+            "z": -5
+          },
+          "floor": 1,
+          "description": "Reduced pressure zone (RPZ) backflow assembly per IPC 608 — annual testing required",
+          "specs": {
+            "size": "4\"",
+            "type": "RPZ",
+            "testFreq": "Annual"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-prv",
+          "name": "Pressure Reducing Valve",
+          "systemType": "WATER",
+          "nodeType": "valve",
+          "position": {
+            "x": -58,
+            "y": 3,
+            "z": -8
+          },
+          "floor": 1,
+          "description": "PRV station reducing city pressure to 55 PSI for building distribution per IPC 604.8",
+          "specs": {
+            "inlet": "65 PSI",
+            "outlet": "55 PSI",
+            "size": "4\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-pump",
+          "name": "Booster Pump",
+          "systemType": "WATER",
+          "nodeType": "equipment",
+          "position": {
+            "x": -55,
+            "y": 4,
+            "z": -12
+          },
+          "floor": 1,
+          "description": "Duplex booster pump set for upper floors — variable speed drives, maintains 45 PSI at top floor",
+          "specs": {
+            "hp": 15,
+            "type": "Duplex VFD",
+            "flow": "120 GPM",
+            "head": "80 ft"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-riser-base",
+          "name": "Cold Water Riser Base",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 18,
+            "z": -82
+          },
+          "floor": 1,
+          "description": "Base of cold water riser — 3\" copper Type L",
+          "specs": {
+            "size": "3\"",
+            "material": "Copper Type L"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-heater-comm",
+          "name": "Commercial Water Heater",
+          "systemType": "WATER",
+          "nodeType": "equipment",
+          "position": {
+            "x": 60,
+            "y": 5,
+            "z": 110
+          },
+          "floor": 1,
+          "description": "Safeway commercial water heater — high-efficiency condensing gas, 200 gal storage",
+          "specs": {
+            "type": "Gas condensing",
+            "input": "199 MBH",
+            "storage": "200 gal",
+            "recovery": "186 GPH"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-comm-cw",
+          "name": "Safeway Cold Water",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": -30,
+            "y": 5,
+            "z": -80
+          },
+          "floor": 1,
+          "description": "Cold water distribution to Safeway fixtures and equipment",
+          "specs": {
+            "size": "2\"",
+            "fixtures": "Sinks, prep, restrooms"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-boiler",
+          "name": "Central Boiler",
+          "systemType": "WATER",
+          "nodeType": "equipment",
+          "position": {
+            "x": 8,
+            "y": 84,
+            "z": 8
+          },
+          "floor": 8,
+          "description": "High-efficiency condensing boiler for domestic hot water — penthouse mechanical room",
+          "specs": {
+            "type": "Condensing gas",
+            "input": "500 MBH",
+            "efficiency": "96%",
+            "storage": "300 gal"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-riser-top",
+          "name": "Hot Water Riser Top",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 82,
+            "z": -82
+          },
+          "floor": 8,
+          "description": "Top of hot water riser from central boiler — recirculation pump maintains 120°F",
+          "specs": {
+            "size": "2.5\"",
+            "material": "Copper Type L",
+            "recircTemp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-f2",
+          "name": "Cold Water F2",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 28,
+            "z": -82
+          },
+          "floor": 2,
+          "description": "Cold water branch at floor 2 — 1.5\" to unit manifolds",
+          "specs": {
+            "size": "1.5\"",
+            "pressure": "~50 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-f2",
+          "name": "Hot Water F2",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 28,
+            "z": -82
+          },
+          "floor": 2,
+          "description": "Hot water branch at floor 2 — recirculating loop maintains temperature",
+          "specs": {
+            "size": "1.5\"",
+            "temp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-branch-f2",
+          "name": "Plumbing Branch F2",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 25,
+            "z": -70
+          },
+          "floor": 2,
+          "description": "Branch distribution to kitchens and bathrooms, floor 2",
+          "specs": {
+            "size": "3/4\"",
+            "fixtures": "Kitchen, bath×2, laundry"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-f3",
+          "name": "Cold Water F3",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 38,
+            "z": -82
+          },
+          "floor": 3,
+          "description": "Cold water branch at floor 3 — 1.5\" to unit manifolds",
+          "specs": {
+            "size": "1.5\"",
+            "pressure": "~50 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-f3",
+          "name": "Hot Water F3",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 38,
+            "z": -82
+          },
+          "floor": 3,
+          "description": "Hot water branch at floor 3 — recirculating loop maintains temperature",
+          "specs": {
+            "size": "1.5\"",
+            "temp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-branch-f3",
+          "name": "Plumbing Branch F3",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 35,
+            "z": -70
+          },
+          "floor": 3,
+          "description": "Branch distribution to kitchens and bathrooms, floor 3",
+          "specs": {
+            "size": "3/4\"",
+            "fixtures": "Kitchen, bath×2, laundry"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-f4",
+          "name": "Cold Water F4",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 48,
+            "z": -82
+          },
+          "floor": 4,
+          "description": "Cold water branch at floor 4 — 1.5\" to unit manifolds",
+          "specs": {
+            "size": "1.5\"",
+            "pressure": "~50 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-f4",
+          "name": "Hot Water F4",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 48,
+            "z": -82
+          },
+          "floor": 4,
+          "description": "Hot water branch at floor 4 — recirculating loop maintains temperature",
+          "specs": {
+            "size": "1.5\"",
+            "temp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-branch-f4",
+          "name": "Plumbing Branch F4",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 45,
+            "z": -70
+          },
+          "floor": 4,
+          "description": "Branch distribution to kitchens and bathrooms, floor 4",
+          "specs": {
+            "size": "3/4\"",
+            "fixtures": "Kitchen, bath×2, laundry"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-f5",
+          "name": "Cold Water F5",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 58,
+            "z": -82
+          },
+          "floor": 5,
+          "description": "Cold water branch at floor 5 — 1.5\" to unit manifolds",
+          "specs": {
+            "size": "1.5\"",
+            "pressure": "~50 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-f5",
+          "name": "Hot Water F5",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 58,
+            "z": -82
+          },
+          "floor": 5,
+          "description": "Hot water branch at floor 5 — recirculating loop maintains temperature",
+          "specs": {
+            "size": "1.5\"",
+            "temp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-branch-f5",
+          "name": "Plumbing Branch F5",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 55,
+            "z": -70
+          },
+          "floor": 5,
+          "description": "Branch distribution to kitchens and bathrooms, floor 5",
+          "specs": {
+            "size": "3/4\"",
+            "fixtures": "Kitchen, bath×2, laundry"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-f6",
+          "name": "Cold Water F6",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 68,
+            "z": -82
+          },
+          "floor": 6,
+          "description": "Cold water branch at floor 6 — 1.5\" to unit manifolds",
+          "specs": {
+            "size": "1.5\"",
+            "pressure": "~50 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-f6",
+          "name": "Hot Water F6",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 68,
+            "z": -82
+          },
+          "floor": 6,
+          "description": "Hot water branch at floor 6 — recirculating loop maintains temperature",
+          "specs": {
+            "size": "1.5\"",
+            "temp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-branch-f6",
+          "name": "Plumbing Branch F6",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 65,
+            "z": -70
+          },
+          "floor": 6,
+          "description": "Branch distribution to kitchens and bathrooms, floor 6",
+          "specs": {
+            "size": "3/4\"",
+            "fixtures": "Kitchen, bath×2, laundry"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-cold-f7",
+          "name": "Cold Water F7",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 35,
+            "y": 78,
+            "z": -82
+          },
+          "floor": 7,
+          "description": "Cold water branch at floor 7 — 1.5\" to unit manifolds",
+          "specs": {
+            "size": "1.5\"",
+            "pressure": "~50 PSI"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-hot-f7",
+          "name": "Hot Water F7",
+          "systemType": "WATER",
+          "nodeType": "junction",
+          "position": {
+            "x": 33,
+            "y": 78,
+            "z": -82
+          },
+          "floor": 7,
+          "description": "Hot water branch at floor 7 — recirculating loop maintains temperature",
+          "specs": {
+            "size": "1.5\"",
+            "temp": "120°F"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "water-branch-f7",
+          "name": "Plumbing Branch F7",
+          "systemType": "WATER",
+          "nodeType": "terminal",
+          "position": {
+            "x": 0,
+            "y": 75,
+            "z": -70
+          },
+          "floor": 7,
+          "description": "Branch distribution to kitchens and bathrooms, floor 7",
+          "specs": {
+            "size": "3/4\"",
+            "fixtures": "Kitchen, bath×2, laundry"
+          },
+          "status": "normal"
+        }
+      ],
+      "pipes": [
+        {
+          "id": "water-p-main-meter",
+          "systemType": "WATER",
+          "fromNode": "water-main",
+          "toNode": "water-meter",
+          "waypoints": [
+            [
+              -75,
+              3,
+              0
+            ],
+            [
+              -68,
+              3,
+              0
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "4\" DI"
+        },
+        {
+          "id": "water-p-meter-bfp",
+          "systemType": "WATER",
+          "fromNode": "water-meter",
+          "toNode": "water-bfp",
+          "waypoints": [
+            [
+              -68,
+              3,
+              0
+            ],
+            [
+              -62,
+              3,
+              0
+            ],
+            [
+              -62,
+              3,
+              -5
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "4\""
+        },
+        {
+          "id": "water-p-bfp-prv",
+          "systemType": "WATER",
+          "fromNode": "water-bfp",
+          "toNode": "water-prv",
+          "waypoints": [
+            [
+              -62,
+              3,
+              -5
+            ],
+            [
+              -58,
+              3,
+              -5
+            ],
+            [
+              -58,
+              3,
+              -8
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "4\""
+        },
+        {
+          "id": "water-p-prv-pump",
+          "systemType": "WATER",
+          "fromNode": "water-prv",
+          "toNode": "water-pump",
+          "waypoints": [
+            [
+              -58,
+              3,
+              -8
+            ],
+            [
+              -55,
+              3,
+              -8
+            ],
+            [
+              -55,
+              4,
+              -12
+            ]
+          ],
+          "diameter": 0.8,
+          "label": "4\""
+        },
+        {
+          "id": "water-p-pump-riser",
+          "systemType": "WATER",
+          "fromNode": "water-pump",
+          "toNode": "water-cold-riser-base",
+          "waypoints": [
+            [
+              -55,
+              4,
+              -12
+            ],
+            [
+              -55,
+              18,
+              -12
+            ],
+            [
+              -55,
+              18,
+              -82
+            ],
+            [
+              35,
+              18,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper"
+        },
+        {
+          "id": "water-p-pump-comm",
+          "systemType": "WATER",
+          "fromNode": "water-pump",
+          "toNode": "water-comm-cw",
+          "waypoints": [
+            [
+              -55,
+              4,
+              -12
+            ],
+            [
+              -55,
+              5,
+              -12
+            ],
+            [
+              -55,
+              5,
+              -80
+            ],
+            [
+              -30,
+              5,
+              -80
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2\" copper"
+        },
+        {
+          "id": "water-p-pump-heater",
+          "systemType": "WATER",
+          "fromNode": "water-pump",
+          "toNode": "water-heater-comm",
+          "waypoints": [
+            [
+              -55,
+              4,
+              -12
+            ],
+            [
+              -55,
+              5,
+              -12
+            ],
+            [
+              -55,
+              5,
+              110
+            ],
+            [
+              60,
+              5,
+              110
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2\" copper"
+        },
+        {
+          "id": "water-p-boiler-riser",
+          "systemType": "WATER",
+          "fromNode": "water-boiler",
+          "toNode": "water-hot-riser-top",
+          "waypoints": [
+            [
+              8,
+              84,
+              8
+            ],
+            [
+              33,
+              84,
+              8
+            ],
+            [
+              33,
+              82,
+              -82
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2.5\" copper"
+        },
+        {
+          "id": "water-p-cold-riser-2",
+          "systemType": "WATER",
+          "fromNode": "water-cold-riser-base",
+          "toNode": "water-cold-f2",
+          "waypoints": [
+            [
+              35,
+              18,
+              -82
+            ],
+            [
+              35,
+              28,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper riser"
+        },
+        {
+          "id": "water-p-hot-riser-2",
+          "systemType": "WATER",
+          "fromNode": "water-hot-f3",
+          "toNode": "water-hot-f2",
+          "waypoints": [
+            [
+              33,
+              38,
+              -82
+            ],
+            [
+              33,
+              28,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "2.5\" copper riser"
+        },
+        {
+          "id": "water-p-branch-f2",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f2",
+          "toNode": "water-branch-f2",
+          "waypoints": [
+            [
+              35,
+              28,
+              -82
+            ],
+            [
+              0,
+              28,
+              -82
+            ],
+            [
+              0,
+              28,
+              -70
+            ],
+            [
+              0,
+              25,
+              -70
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1.5\" to 3/4\""
+        },
+        {
+          "id": "water-p-cold-riser-3",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f2",
+          "toNode": "water-cold-f3",
+          "waypoints": [
+            [
+              35,
+              28,
+              -82
+            ],
+            [
+              35,
+              38,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper riser"
+        },
+        {
+          "id": "water-p-hot-riser-3",
+          "systemType": "WATER",
+          "fromNode": "water-hot-f4",
+          "toNode": "water-hot-f3",
+          "waypoints": [
+            [
+              33,
+              48,
+              -82
+            ],
+            [
+              33,
+              38,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "2.5\" copper riser"
+        },
+        {
+          "id": "water-p-branch-f3",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f3",
+          "toNode": "water-branch-f3",
+          "waypoints": [
+            [
+              35,
+              38,
+              -82
+            ],
+            [
+              0,
+              38,
+              -82
+            ],
+            [
+              0,
+              38,
+              -70
+            ],
+            [
+              0,
+              35,
+              -70
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1.5\" to 3/4\""
+        },
+        {
+          "id": "water-p-cold-riser-4",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f3",
+          "toNode": "water-cold-f4",
+          "waypoints": [
+            [
+              35,
+              38,
+              -82
+            ],
+            [
+              35,
+              48,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper riser"
+        },
+        {
+          "id": "water-p-hot-riser-4",
+          "systemType": "WATER",
+          "fromNode": "water-hot-f5",
+          "toNode": "water-hot-f4",
+          "waypoints": [
+            [
+              33,
+              58,
+              -82
+            ],
+            [
+              33,
+              48,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "2.5\" copper riser"
+        },
+        {
+          "id": "water-p-branch-f4",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f4",
+          "toNode": "water-branch-f4",
+          "waypoints": [
+            [
+              35,
+              48,
+              -82
+            ],
+            [
+              0,
+              48,
+              -82
+            ],
+            [
+              0,
+              48,
+              -70
+            ],
+            [
+              0,
+              45,
+              -70
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1.5\" to 3/4\""
+        },
+        {
+          "id": "water-p-cold-riser-5",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f4",
+          "toNode": "water-cold-f5",
+          "waypoints": [
+            [
+              35,
+              48,
+              -82
+            ],
+            [
+              35,
+              58,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper riser"
+        },
+        {
+          "id": "water-p-hot-riser-5",
+          "systemType": "WATER",
+          "fromNode": "water-hot-f6",
+          "toNode": "water-hot-f5",
+          "waypoints": [
+            [
+              33,
+              68,
+              -82
+            ],
+            [
+              33,
+              58,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "2.5\" copper riser"
+        },
+        {
+          "id": "water-p-branch-f5",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f5",
+          "toNode": "water-branch-f5",
+          "waypoints": [
+            [
+              35,
+              58,
+              -82
+            ],
+            [
+              0,
+              58,
+              -82
+            ],
+            [
+              0,
+              58,
+              -70
+            ],
+            [
+              0,
+              55,
+              -70
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1.5\" to 3/4\""
+        },
+        {
+          "id": "water-p-cold-riser-6",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f5",
+          "toNode": "water-cold-f6",
+          "waypoints": [
+            [
+              35,
+              58,
+              -82
+            ],
+            [
+              35,
+              68,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper riser"
+        },
+        {
+          "id": "water-p-hot-riser-6",
+          "systemType": "WATER",
+          "fromNode": "water-hot-f7",
+          "toNode": "water-hot-f6",
+          "waypoints": [
+            [
+              33,
+              78,
+              -82
+            ],
+            [
+              33,
+              68,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "2.5\" copper riser"
+        },
+        {
+          "id": "water-p-branch-f6",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f6",
+          "toNode": "water-branch-f6",
+          "waypoints": [
+            [
+              35,
+              68,
+              -82
+            ],
+            [
+              0,
+              68,
+              -82
+            ],
+            [
+              0,
+              68,
+              -70
+            ],
+            [
+              0,
+              65,
+              -70
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1.5\" to 3/4\""
+        },
+        {
+          "id": "water-p-cold-riser-7",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f6",
+          "toNode": "water-cold-f7",
+          "waypoints": [
+            [
+              35,
+              68,
+              -82
+            ],
+            [
+              35,
+              78,
+              -82
+            ]
+          ],
+          "diameter": 0.7,
+          "label": "3\" copper riser"
+        },
+        {
+          "id": "water-p-hot-riser-7",
+          "systemType": "WATER",
+          "fromNode": "water-hot-riser-top",
+          "toNode": "water-hot-f7",
+          "waypoints": [
+            [
+              33,
+              82,
+              -82
+            ],
+            [
+              33,
+              78,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "2.5\" copper riser"
+        },
+        {
+          "id": "water-p-branch-f7",
+          "systemType": "WATER",
+          "fromNode": "water-cold-f7",
+          "toNode": "water-branch-f7",
+          "waypoints": [
+            [
+              35,
+              78,
+              -82
+            ],
+            [
+              0,
+              78,
+              -82
+            ],
+            [
+              0,
+              78,
+              -70
+            ],
+            [
+              0,
+              75,
+              -70
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1.5\" to 3/4\""
+        }
+      ]
+    },
+    {
+      "type": "GAS",
+      "nodes": [
+        {
+          "id": "gas-main",
+          "name": "Gas Service Entry",
+          "systemType": "GAS",
+          "nodeType": "source",
+          "position": {
+            "x": -75,
+            "y": 3,
+            "z": 30
+          },
+          "floor": 1,
+          "description": "2\" steel gas service from Puget Sound Energy main — low pressure entry per IFGC 401",
+          "specs": {
+            "size": "2\"",
+            "material": "Steel Sch 40",
+            "pressure": "2 PSI",
+            "utility": "PSE"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-meter",
+          "name": "Gas Meter Assembly",
+          "systemType": "GAS",
+          "nodeType": "meter",
+          "position": {
+            "x": -70,
+            "y": 3,
+            "z": 30
+          },
+          "floor": 1,
+          "description": "Exterior-accessible gas meter with earthquake shutoff valve per IFGC 409",
+          "specs": {
+            "size": "2\"",
+            "type": "Rotary",
+            "eqShutoff": "Seismic valve"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-reg",
+          "name": "Pressure Regulator",
+          "systemType": "GAS",
+          "nodeType": "valve",
+          "position": {
+            "x": -65,
+            "y": 3,
+            "z": 28
+          },
+          "floor": 1,
+          "description": "Service regulator reducing to 7\" WC for building distribution per IFGC 402",
+          "specs": {
+            "inlet": "2 PSI",
+            "outlet": "7\" WC",
+            "size": "2\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-shutoff",
+          "name": "Main Gas Shutoff",
+          "systemType": "GAS",
+          "nodeType": "valve",
+          "position": {
+            "x": -60,
+            "y": 3,
+            "z": 25
+          },
+          "floor": 1,
+          "description": "Manual main shutoff valve — labeled and accessible per IFGC 409.5",
+          "specs": {
+            "size": "2\"",
+            "type": "Ball valve",
+            "location": "Interior, marked"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-comm-tee",
+          "name": "Commercial Gas Tee",
+          "systemType": "GAS",
+          "nodeType": "junction",
+          "position": {
+            "x": -55,
+            "y": 5,
+            "z": 25
+          },
+          "floor": 1,
+          "description": "Branch tee — splits commercial feed from riser feed",
+          "specs": {
+            "size": "2\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-bakery",
+          "name": "Bakery Gas Connection",
+          "systemType": "GAS",
+          "nodeType": "terminal",
+          "position": {
+            "x": 50,
+            "y": 5,
+            "z": 90
+          },
+          "floor": 1,
+          "description": "Gas manifold for bakery ovens, proof box, and deck oven — per IFGC 623 for commercial cooking",
+          "specs": {
+            "size": "1.5\"",
+            "load": "400 MBH",
+            "equipment": "Ovens, proof box"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-deli",
+          "name": "Deli Gas Connection",
+          "systemType": "GAS",
+          "nodeType": "terminal",
+          "position": {
+            "x": 50,
+            "y": 5,
+            "z": -110
+          },
+          "floor": 1,
+          "description": "Gas manifold for deli fryers, grill, and steam table",
+          "specs": {
+            "size": "1\"",
+            "load": "250 MBH",
+            "equipment": "Fryers, grill, steam table"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-riser-base",
+          "name": "Gas Riser Base",
+          "systemType": "GAS",
+          "nodeType": "junction",
+          "position": {
+            "x": 30,
+            "y": 18,
+            "z": -82
+          },
+          "floor": 1,
+          "description": "Base of gas riser to penthouse — 1.5\" steel in ventilated chase per IFGC 404",
+          "specs": {
+            "size": "1.5\"",
+            "material": "Steel Sch 40"
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-riser-top",
+          "name": "Gas Riser Top",
+          "systemType": "GAS",
+          "nodeType": "junction",
+          "position": {
+            "x": 30,
+            "y": 82,
+            "z": -82
+          },
+          "floor": 8,
+          "description": "Top of gas riser at penthouse level",
+          "specs": {
+            "size": "1.5\""
+          },
+          "status": "normal"
+        },
+        {
+          "id": "gas-boiler-conn",
+          "name": "Boiler Gas Connection",
+          "systemType": "GAS",
+          "nodeType": "terminal",
+          "position": {
+            "x": 8,
+            "y": 84,
+            "z": 10
+          },
+          "floor": 8,
+          "description": "Gas connection to central condensing boiler — flex connector with shutoff per IFGC 411",
+          "specs": {
+            "size": "1.5\"",
+            "load": "500 MBH",
+            "connector": "CSST flex"
+          },
+          "status": "normal"
+        }
+      ],
+      "pipes": [
+        {
+          "id": "gas-p-main-meter",
+          "systemType": "GAS",
+          "fromNode": "gas-main",
+          "toNode": "gas-meter",
+          "waypoints": [
+            [
+              -75,
+              3,
+              30
+            ],
+            [
+              -70,
+              3,
+              30
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2\" steel"
+        },
+        {
+          "id": "gas-p-meter-reg",
+          "systemType": "GAS",
+          "fromNode": "gas-meter",
+          "toNode": "gas-reg",
+          "waypoints": [
+            [
+              -70,
+              3,
+              30
+            ],
+            [
+              -65,
+              3,
+              30
+            ],
+            [
+              -65,
+              3,
+              28
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2\" steel"
+        },
+        {
+          "id": "gas-p-reg-shutoff",
+          "systemType": "GAS",
+          "fromNode": "gas-reg",
+          "toNode": "gas-shutoff",
+          "waypoints": [
+            [
+              -65,
+              3,
+              28
+            ],
+            [
+              -60,
+              3,
+              28
+            ],
+            [
+              -60,
+              3,
+              25
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2\" steel"
+        },
+        {
+          "id": "gas-p-shutoff-tee",
+          "systemType": "GAS",
+          "fromNode": "gas-shutoff",
+          "toNode": "gas-comm-tee",
+          "waypoints": [
+            [
+              -60,
+              3,
+              25
+            ],
+            [
+              -55,
+              3,
+              25
+            ],
+            [
+              -55,
+              5,
+              25
+            ]
+          ],
+          "diameter": 0.6,
+          "label": "2\" steel"
+        },
+        {
+          "id": "gas-p-tee-bakery",
+          "systemType": "GAS",
+          "fromNode": "gas-comm-tee",
+          "toNode": "gas-bakery",
+          "waypoints": [
+            [
+              -55,
+              5,
+              25
+            ],
+            [
+              -55,
+              5,
+              90
+            ],
+            [
+              50,
+              5,
+              90
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "1.5\" steel"
+        },
+        {
+          "id": "gas-p-tee-deli",
+          "systemType": "GAS",
+          "fromNode": "gas-comm-tee",
+          "toNode": "gas-deli",
+          "waypoints": [
+            [
+              -55,
+              5,
+              25
+            ],
+            [
+              -55,
+              5,
+              -110
+            ],
+            [
+              50,
+              5,
+              -110
+            ]
+          ],
+          "diameter": 0.4,
+          "label": "1\" steel"
+        },
+        {
+          "id": "gas-p-tee-riser",
+          "systemType": "GAS",
+          "fromNode": "gas-comm-tee",
+          "toNode": "gas-riser-base",
+          "waypoints": [
+            [
+              -55,
+              5,
+              25
+            ],
+            [
+              -55,
+              18,
+              25
+            ],
+            [
+              -55,
+              18,
+              -82
+            ],
+            [
+              30,
+              18,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "1.5\" steel"
+        },
+        {
+          "id": "gas-p-riser",
+          "systemType": "GAS",
+          "fromNode": "gas-riser-base",
+          "toNode": "gas-riser-top",
+          "waypoints": [
+            [
+              30,
+              18,
+              -82
+            ],
+            [
+              30,
+              28,
+              -82
+            ],
+            [
+              30,
+              38,
+              -82
+            ],
+            [
+              30,
+              48,
+              -82
+            ],
+            [
+              30,
+              58,
+              -82
+            ],
+            [
+              30,
+              68,
+              -82
+            ],
+            [
+              30,
+              78,
+              -82
+            ],
+            [
+              30,
+              82,
+              -82
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "1.5\" steel riser"
+        },
+        {
+          "id": "gas-p-riser-boiler",
+          "systemType": "GAS",
+          "fromNode": "gas-riser-top",
+          "toNode": "gas-boiler-conn",
+          "waypoints": [
+            [
+              30,
+              82,
+              -82
+            ],
+            [
+              30,
+              84,
+              -82
+            ],
+            [
+              30,
+              84,
+              10
+            ],
+            [
+              8,
+              84,
+              10
+            ]
+          ],
+          "diameter": 0.5,
+          "label": "1.5\" CSST"
+        }
+      ]
+    }
+  ]
+}

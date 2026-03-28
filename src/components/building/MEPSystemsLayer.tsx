@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import * as THREE from 'three';
-import { SensorType, SENSOR_COLORS, SystemPipe } from '@/types';
+import { SensorType, SENSOR_COLORS, SystemPipe, MEPSystem } from '@/types';
 import { getMEPSystems } from '@/data/mepSystems';
 import SystemNode3D from './SystemNode3D';
 import type { SystemNode } from '@/types';
@@ -10,6 +10,7 @@ import type { SystemNode } from '@/types';
 interface Props {
   visibleSystems: Set<SensorType>;
   onNodeSelect: (node: SystemNode) => void;
+  mepSystems?: MEPSystem[];
 }
 
 function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
@@ -20,13 +21,10 @@ function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
 
     const radius = pipeData.diameter * 0.5;
 
-    // Build straight-segment path that only bends at right angles
-    // (like real conduit / pipe runs following building structure)
     const raw = pipeData.waypoints.map(
       ([x, y, z]) => new THREE.Vector3(x, y, z),
     );
 
-    // Insert intermediate waypoints so every turn is axis-aligned
     const aligned: THREE.Vector3[] = [raw[0]];
     for (let i = 1; i < raw.length; i++) {
       const prev = aligned[aligned.length - 1];
@@ -35,15 +33,12 @@ function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
       const dy = next.y - prev.y;
       const dz = next.z - prev.z;
 
-      // If movement is already along one axis, keep it straight
       const axes = [Math.abs(dx), Math.abs(dy), Math.abs(dz)];
       const moving = axes.filter((a) => a > 0.01).length;
 
       if (moving <= 1) {
         aligned.push(next.clone());
       } else {
-        // Route in axis-priority order: vertical first, then X, then Z
-        // This mimics real MEP routing (risers go up, then run horizontally)
         let cursor = prev.clone();
         if (Math.abs(dy) > 0.01) {
           cursor = new THREE.Vector3(cursor.x, next.y, cursor.z);
@@ -55,7 +50,6 @@ function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
         }
         if (Math.abs(dz) > 0.01) {
           cursor = new THREE.Vector3(cursor.x, cursor.y, next.z);
-          // Avoid duplicate if we've already arrived
           if (cursor.distanceTo(aligned[aligned.length - 1]) > 0.01) {
             aligned.push(cursor.clone());
           }
@@ -63,7 +57,6 @@ function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
       }
     }
 
-    // Use a piecewise LineCurve3 path so TubeGeometry follows straight segments
     const curves: THREE.Curve<THREE.Vector3>[] = [];
     for (let i = 0; i < aligned.length - 1; i++) {
       curves.push(new THREE.LineCurve3(aligned[i], aligned[i + 1]));
@@ -92,8 +85,9 @@ function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
   );
 }
 
-export default function MEPSystemsLayer({ visibleSystems, onNodeSelect }: Props) {
-  const systems = useMemo(() => getMEPSystems(), []);
+export default function MEPSystemsLayer({ visibleSystems, onNodeSelect, mepSystems }: Props) {
+  const defaultSystems = useMemo(() => getMEPSystems(), []);
+  const systems = mepSystems || defaultSystems;
 
   const filteredSystems = useMemo(
     () => systems.filter((s) => visibleSystems.has(s.type)),

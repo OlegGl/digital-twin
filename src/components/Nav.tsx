@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import BuildingSelector from './buildings/BuildingSelector';
 
 export default function Nav() {
   const pathname = usePathname();
@@ -9,14 +10,18 @@ export default function Nav() {
   const links = [
     { href: '/', label: '3D View' },
     { href: '/dashboard', label: 'Dashboard' },
+    { href: '/buildings', label: 'Buildings' },
   ];
 
   return (
-    <nav className="h-14 bg-[#111118] border-b border-gray-800 flex items-center px-4 md:px-6 gap-6">
-      <Link href="/" className="text-lg font-bold text-white tracking-tight mr-4">
+    <nav className="h-14 bg-[#111118] border-b border-gray-800 flex items-center px-4 md:px-6 gap-4">
+      <Link href="/" className="text-lg font-bold text-white tracking-tight mr-2">
         <span className="text-blue-400">◆</span> Digital Twin
       </Link>
-      <div className="flex gap-1">
+
+      <BuildingSelector />
+
+      <div className="flex gap-1 ml-auto">
         {links.map((l) => (
           <Link
             key={l.href}

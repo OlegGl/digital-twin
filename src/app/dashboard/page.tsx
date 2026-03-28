@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
-import { defaultBuilding } from '@/data/building';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useSelectedBuildingId } from '@/lib/buildingStore';
+import type { BuildingConfig } from '@/lib/buildingSchema';
 import { SensorType, SENSOR_COLORS, SENSOR_LABELS, TelemetryPoint } from '@/types';
 import {
   LineChart, Line, AreaChart, Area, BarChart, Bar,
@@ -85,14 +86,6 @@ const RANGES = [
   { label: '30d', ms: 2592000000 },
 ];
 
-const building = defaultBuilding;
-const allSensors = building.floors.flatMap((f) => f.sensors);
-const totalSqft = building.floors.reduce((s, f) => s + f.sqft, 0);
-
-function sensorsByType(type: SensorType) {
-  return allSensors.filter((s) => s.type === type);
-}
-
 const chartStyle = {
   backgroundColor: '#111118',
   border: '1px solid #333',
@@ -106,12 +99,33 @@ function formatTime(v: string) {
 }
 
 export default function Dashboard() {
-  const [rangeIdx, setRangeIdx] = useState(2); // default 24h
+  const [selectedId] = useSelectedBuildingId();
+  const [building, setBuilding] = useState<BuildingConfig | null>(null);
+
+  const [rangeIdx, setRangeIdx] = useState(2);
   const range = RANGES[rangeIdx];
   const [hvacData, setHvacData] = useState<TelemetryPoint[]>([]);
   const [elecData, setElecData] = useState<TelemetryPoint[]>([]);
   const [waterData, setWaterData] = useState<TelemetryPoint[]>([]);
   const [secData, setSecData] = useState<TelemetryPoint[]>([]);
+
+  // Load building
+  useEffect(() => {
+    const id = selectedId || 'cascade-commons';
+    fetch(`/api/buildings/${id}`)
+      .then((r) => r.ok ? r.json() : null)
+      .then(setBuilding)
+      .catch(() => setBuilding(null));
+  }, [selectedId]);
+
+  const allSensors = useMemo(() =>
+    building?.floors.flatMap((f) => f.sensors) || [], [building]);
+
+  const totalSqft = useMemo(() =>
+    building?.floors.reduce((s, f) => s + f.sqft, 0) || 0, [building]);
+
+  const sensorsByType = useCallback((type: SensorType) =>
+    allSensors.filter((s) => s.type === type), [allSensors]);
 
   const fetchData = useCallback(async () => {
     const to = new Date().toISOString();
@@ -123,7 +137,6 @@ export default function Dashboard() {
     const waterSensors = sensorsByType(SensorType.WATER);
     const secSensors = sensorsByType(SensorType.SECURITY);
 
-    // Fetch one representative sensor per type
     const [h, e, w, s] = await Promise.all([
       hvacSensors[0] ? fetch(`/api/telemetry?sensorId=${hvacSensors[0].id}&from=${from}&to=${to}&interval=${interval}`).then(r => r.json()) : [],
       elecSensors[0] ? fetch(`/api/telemetry?sensorId=${elecSensors[0].id}&from=${from}&to=${to}&interval=${interval}`).then(r => r.json()) : [],
@@ -134,11 +147,19 @@ export default function Dashboard() {
     setElecData(e);
     setWaterData(w);
     setSecData(s);
-  }, [range.ms]);
+  }, [range.ms, sensorsByType]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const systemTypes = Object.values(SensorType);
+
+  if (!building) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-gray-500 animate-pulse">Loading dashboard...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4 md:p-6 max-w-7xl mx-auto overflow-y-auto h-full" style={{ minHeight: 0 }}>
@@ -193,18 +214,10 @@ export default function Dashboard() {
         {systemTypes.map((t) => {
           const count = sensorsByType(t).length;
           return (
-            <div
-              key={t}
-              className="bg-[#111118] rounded-lg border border-gray-800 p-3"
-            >
+            <div key={t} className="bg-[#111118] rounded-lg border border-gray-800 p-3">
               <div className="flex items-center gap-2 mb-2">
-                <div
-                  className="w-3 h-3 rounded-sm"
-                  style={{ backgroundColor: SENSOR_COLORS[t] }}
-                />
-                <span className="text-xs font-medium text-gray-300">
-                  {SENSOR_LABELS[t]}
-                </span>
+                <div className="w-3 h-3 rounded-sm" style={{ backgroundColor: SENSOR_COLORS[t] }} />
+                <span className="text-xs font-medium text-gray-300">{SENSOR_LABELS[t]}</span>
               </div>
               <div className="text-lg font-bold text-white">{count}</div>
               <div className="text-[10px] text-green-400">● All Normal</div>
@@ -213,14 +226,7 @@ export default function Dashboard() {
         })}
       </div>
 
-      {/* Charts grid */}
-      <ChartGrid
-        hvacData={hvacData}
-        elecData={elecData}
-        waterData={waterData}
-        secData={secData}
-      />
+      <ChartGrid hvacData={hvacData} elecData={elecData} waterData={waterData} secData={secData} />
     </div>
   );
 }
-
