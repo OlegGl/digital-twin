@@ -18,15 +18,61 @@ function PipeSegment({ pipeData }: { pipeData: SystemPipe }) {
   const geometry = useMemo(() => {
     if (pipeData.waypoints.length < 2) return null;
 
-    const points = pipeData.waypoints.map(
+    const radius = pipeData.diameter * 0.5;
+
+    // Build straight-segment path that only bends at right angles
+    // (like real conduit / pipe runs following building structure)
+    const raw = pipeData.waypoints.map(
       ([x, y, z]) => new THREE.Vector3(x, y, z),
     );
 
-    const curve = new THREE.CatmullRomCurve3(points, false, 'chordal', 0.05);
-    const tubularSegments = Math.max(points.length * 10, 20);
-    const radius = pipeData.diameter * 0.5;
+    // Insert intermediate waypoints so every turn is axis-aligned
+    const aligned: THREE.Vector3[] = [raw[0]];
+    for (let i = 1; i < raw.length; i++) {
+      const prev = aligned[aligned.length - 1];
+      const next = raw[i];
+      const dx = next.x - prev.x;
+      const dy = next.y - prev.y;
+      const dz = next.z - prev.z;
 
-    return new THREE.TubeGeometry(curve, tubularSegments, radius, 8, false);
+      // If movement is already along one axis, keep it straight
+      const axes = [Math.abs(dx), Math.abs(dy), Math.abs(dz)];
+      const moving = axes.filter((a) => a > 0.01).length;
+
+      if (moving <= 1) {
+        aligned.push(next.clone());
+      } else {
+        // Route in axis-priority order: vertical first, then X, then Z
+        // This mimics real MEP routing (risers go up, then run horizontally)
+        let cursor = prev.clone();
+        if (Math.abs(dy) > 0.01) {
+          cursor = new THREE.Vector3(cursor.x, next.y, cursor.z);
+          aligned.push(cursor.clone());
+        }
+        if (Math.abs(dx) > 0.01) {
+          cursor = new THREE.Vector3(next.x, cursor.y, cursor.z);
+          aligned.push(cursor.clone());
+        }
+        if (Math.abs(dz) > 0.01) {
+          cursor = new THREE.Vector3(cursor.x, cursor.y, next.z);
+          // Avoid duplicate if we've already arrived
+          if (cursor.distanceTo(aligned[aligned.length - 1]) > 0.01) {
+            aligned.push(cursor.clone());
+          }
+        }
+      }
+    }
+
+    // Use a piecewise LineCurve3 path so TubeGeometry follows straight segments
+    const curves: THREE.Curve<THREE.Vector3>[] = [];
+    for (let i = 0; i < aligned.length - 1; i++) {
+      curves.push(new THREE.LineCurve3(aligned[i], aligned[i + 1]));
+    }
+    const path = new THREE.CurvePath<THREE.Vector3>();
+    curves.forEach((c) => path.add(c));
+
+    const tubularSegments = Math.max(aligned.length * 4, 12);
+    return new THREE.TubeGeometry(path, tubularSegments, radius, 8, false);
   }, [pipeData.waypoints, pipeData.diameter]);
 
   if (!geometry) return null;
